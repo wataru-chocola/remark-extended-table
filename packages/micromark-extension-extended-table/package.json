@@ -30,6 +30,9 @@
     "default": "./index.js"
   },
   "dependencies": {
+    "micromark-util-chunked": "^1.0.0",
+    "micromark-util-symbol": "^1.0.0",
+    "micromark-util-types": "^1.0.1",
     "assert": "^2.0.0"
   },
   "devDependencies": {
