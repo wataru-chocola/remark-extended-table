@@ -1,7 +1,6 @@
 {
   "name": "remark-extended-table",
-  "version": "0.0.1",
-  "description": "remark plugin to support definition list",
+  "version": "0.0.0",
   "author": "Wataru Watanabe",
   "license": "MIT",
   "repository": {
@@ -12,14 +11,18 @@
     "url": "https://github.com/wataru-chocola/remark-extended-table/issues"
   },
   "homepage": "https://github.com/wataru-chocola/remark-extended-table",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "type": "module",
-  "keywords": [
-    "remark",
-    "remark-plugin",
-    "markdown"
-  ],
+  "workspaces": [ "packages/*" ],
+  "keywords": [],
+  "scripts": {
+    "format": "prettier --write \"./**/*.{ts,json}\"",
+    "lint": "eslint ./**/*.{ts}",
+    "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
+    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
+    "build": "npm run clean && tsc",
+    "prepack": "npm run build",
+    "clean": "rimraf index.js index.test.js lib/*.js"
+  },
   "dependencies": {
   },
   "devDependencies": {
