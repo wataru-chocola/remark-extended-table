@@ -55,8 +55,9 @@
     "lint-fix": "eslint --fix ./dev/**/*.{ts} && prettier --write ./dev/**/*.{ts}",
     "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest --testPathIgnorePatterns=\"/node_modules/|/dev/\"",
     "test-dev": "tsc && NODE_OPTIONS=\"--experimental-vm-modules -C development\" jest \"dev/.*\\.test\\.js\"",
-    "build": "npm run clean && tsc && micromark-build",
-    "prepack": "npm run build",
+    "build": "tsc && micromark-build",
+    "rebuild": "npm run clean && npm run build",
+    "prepublish": "npm run rebuild",
     "clean": "rimraf lib/ index.js index.test.js dev/**/*.js"
   }
 }
