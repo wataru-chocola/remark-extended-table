@@ -1,11 +1,6 @@
 # ignore build result
-/index.js
-/index.test.js
-/index.d.ts
-/index.test.d.ts
-/dev/**/*.js
-/dev/**/*.d.ts
-/lib
+/lib/**/*.js
+/lib/**/*.d.ts
 
 # Logs
 logs

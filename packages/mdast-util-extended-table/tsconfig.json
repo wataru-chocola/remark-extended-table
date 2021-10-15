@@ -1,6 +1,6 @@
 {
   "include": [
-    "./dev/**/*.ts"
+    "./**/*.ts"
   ],
   "compilerOptions": {
     "target": "es2018",
