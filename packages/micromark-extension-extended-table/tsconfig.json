@@ -1,0 +1,14 @@
+{
+  "include": [
+    "./dev/**/*.ts"
+  ],
+  "compilerOptions": {
+    "target": "es2018",
+    "strict": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "micromark-extension-extended-table",
+  "version": "0.0.1",
+  "description": "micromark extension to support table syntax allowing colspan/rowspan",
+  "author": "Wataru Watanabe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wataru-chocola/remark-extended-table.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wataru-chocola/remark-extended-table/issues"
+  },
+  "homepage": "https://github.com/wataru-chocola/remark-extended-table/tree/main/packages/micromark-extension-extended-table",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "type": "module",
+  "files": [
+    "dev/**/*.js",
+    "dev/**/*.d.ts",
+    "!dev/**/*.test.js",
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "!lib/**/*.test.js",
+    "index.d.ts",
+    "index.js"
+  ],
+  "exports": {
+    "development": "./dev/index.js",
+    "default": "./index.js"
+  },
+  "dependencies": {
+    "micromark-util-chunked": "^1.0.0",
+    "micromark-util-symbol": "^1.0.0",
+    "micromark-util-types": "^1.0.1",
+    "assert": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.7.10",
+    "debug": "4.3.2",
+    "micromark": "3.0.5",
+    "micromark-build": "1.0.0",
+    "micromark-extension-gfm-table": "^1.0.2"
+  },
+  "peerDependencies": {
+    "micromark": "^3.0.5"
+  },
+  "keywords": [
+    "micromark",
+    "micromark-extension"
+  ],
+  "scripts": {
+    "format": "prettier --write \"./dev/**/*.{js,ts,json}\"",
+    "lint": "eslint ./dev/**/*.{ts}",
+    "lint-fix": "eslint --fix ./dev/**/*.{ts} && prettier --write ./dev/**/*.{ts}",
+    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest --testPathIgnorePatterns=\"/node_modules/|/dev/\"",
+    "test-dev": "tsc && NODE_OPTIONS=\"--experimental-vm-modules -C development\" jest \"dev/.*\\.test\\.js\"",
+    "build": "tsc && micromark-build",
+    "rebuild": "npm run clean && npm run build",
+    "prepublish": "npm run rebuild",
+    "clean": "rimraf lib/ index.js index.test.js dev/**/*.js"
+  }
+}
