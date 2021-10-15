@@ -15,12 +15,28 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "type": "module",
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts",
+    "!lib/*.test.js",
+    "!lib/*.test.d.ts"
+  ],
+  "scripts": {
+    "format": "prettier --write \"./**/*.{ts,json}\"",
+    "lint": "eslint ./**/*.{ts}",
+    "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
+    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
+    "build": "npm run clean && tsc",
+    "prepack": "npm run build",
+    "clean": "rimraf index.js index.test.js lib/*.js"
+  },
   "keywords": [
     "remark",
     "remark-plugin",
     "markdown"
   ],
   "dependencies": {
+    "micromark-extension-gfm-table": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
@@ -32,7 +48,15 @@
     "jest": "27.1.1",
     "lerna": "^4.0.0",
     "prettier": "2.4.0",
+    "rehype-stringify": "9.0.2",
+    "remark-parse": "10.0.0",
+    "remark-rehype": "9.0.0",
     "rimraf": "3.0.2",
-    "typescript": "4.4.3"
+    "typescript": "4.4.3",
+    "unified": "10.1.0"
+  },
+  "peerDependencies": {
+    "remark-parse": "^10.0.0",
+    "unified": "^10.1.0"
   }
 }
