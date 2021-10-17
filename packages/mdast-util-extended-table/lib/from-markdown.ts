@@ -1,6 +1,7 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
 import type {
   Root,
+  Text,
   Table as MdastTable,
   TableRow as MdastTableRow,
   TableCell as MdastTableCell,
@@ -83,12 +84,30 @@ function transformTable(tree: Root): Root {
       for (let j = row.children.length - 1; j >= 0; j--) {
         const cell = row.children[j];
         if (isCellColspan(cell)) {
-          row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
-          row.children.splice(j, 1);
+          if (j >= row.children.length - 1) {
+            const text: Text = {
+              type: 'text',
+              value: '>',
+              position: Object.assign({}, row.children[j].children[0].position),
+            };
+            row.children[j].children.splice(0, 1, text);
+          } else {
+            row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+            row.children.splice(j, 1);
+          }
         } else if (isCellRowspan(cell)) {
-          const prev_row = node.children[i - 1];
-          prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
-          row.children.splice(j, 1);
+          if (i <= 1) {
+            const text: Text = {
+              type: 'text',
+              value: '^',
+              position: Object.assign({}, node.children[i].children[j].children[0].position),
+            };
+            node.children[i].children[j].children.splice(0, 1, text);
+          } else {
+            const prev_row = node.children[i - 1];
+            prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
+            row.children.splice(j, 1);
+          }
         }
       }
     }

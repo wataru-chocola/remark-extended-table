@@ -70,3 +70,31 @@ test('simple colspan', () => {
 </table>`;
   process(md).then((result) => expect(result.value).toBe(html));
 });
+
+test('marker at end', () => {
+  const md = `
+| a | b |
+|---|---|
+| ^ | 2 |
+| 3 | > |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>></td>
+</tr>
+</tbody>
+</table>`;
+  process(md).then((result) => expect(result.value).toBe(html));
+});
