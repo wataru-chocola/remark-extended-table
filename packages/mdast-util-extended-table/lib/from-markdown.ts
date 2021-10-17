@@ -1,5 +1,11 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
-import type { Parent, Root, Table, TableCell } from 'mdast';
+import type {
+  Root,
+  Table as MdastTable,
+  TableRow as MdastTableRow,
+  TableCell as MdastTableCell,
+} from 'mdast';
+import type { Node } from 'unist';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
@@ -17,12 +23,18 @@ export const extendedTableFromMarkdown = {
   transforms: [transformTable],
 };
 
-interface TableCellNode extends Parent {
-  type: 'tableCell';
+type Table = Omit<MdastTable, 'children'> & {
+  children: Array<TableRow>;
+};
+
+type TableRow = Omit<MdastTableRow, 'children'> & {
+  children: Array<TableCell>;
+};
+
+type TableCell = MdastTableCell & {
   colspan?: number;
   rowspan?: number;
-  children: [];
-}
+};
 
 interface TableCellColspanNode extends Node {
   type: 'tableCellColspan';
@@ -33,8 +45,7 @@ interface TableCellRowspanNode extends Node {
 }
 
 function enterCell(this: CompileContext, token: Token): void {
-  // @ts-ignore
-  this.enter<TableCellNode>({ type: 'tableCell', children: [] }, token);
+  this.enter<TableCell>({ type: 'tableCell', children: [] }, token);
   this.setData('inTableCell', true);
 }
 
@@ -43,18 +54,16 @@ function enterColspanMarker(this: CompileContext, token: Token): void {
     // @ts-ignore
     this.enter<TableCellColspanNode>({ type: 'tableCellColspan' }, token);
   } else {
-    // @ts-ignore
-    this.enter({ type: 'Text', value: '>' }, token);
+    this.enter({ type: 'text', value: '>' }, token);
   }
 }
 
 function enterRowspanMarker(this: CompileContext, token: Token): void {
   if (this.getData('inTableCell')) {
     // @ts-ignore
-    this.enter<TableCellColspanNode>({ type: 'tableCellRowspan' }, token);
+    this.enter<TableCellRowspanNode>({ type: 'tableCellRowspan' }, token);
   } else {
-    // @ts-ignore
-    this.enter({ type: 'Text', value: '^' }, token);
+    this.enter({ type: 'text', value: '^' }, token);
   }
 }
 
@@ -74,12 +83,10 @@ function transformTable(tree: Root): Root {
       for (let j = row.children.length - 1; j >= 0; j--) {
         const cell = row.children[j];
         if (isCellColspan(cell)) {
-          // @ts-ignore
-          row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+          row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
           row.children.splice(j, 1);
         } else if (isCellRowspan(cell)) {
           const prev_row = node.children[i - 1];
-          // @ts-ignore
           prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
           row.children.splice(j, 1);
         }
