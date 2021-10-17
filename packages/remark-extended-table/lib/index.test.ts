@@ -98,3 +98,40 @@ test('marker at end', () => {
 </table>`;
   process(md).then((result) => expect(result.value).toBe(html));
 });
+
+test('marker at end', () => {
+  const md = `
+| a | b | c |
+|---|---|---|
+| > | 1 | 2 |
+| ^ | ^ | 3 |
+| > | 4 | 5 |
+| > | ^ | 6 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2" colspan="2">1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+</tr>
+<tr>
+<td rowspan="2" colspan="2">4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+</tr>
+</tbody>
+</table>`;
+  process(md).then((result) => expect(result.value).toBe(html));
+});
