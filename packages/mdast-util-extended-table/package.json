@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "hast-util-to-html": "8.0.2",
-    "mdast-util-gfm-table": "^1.0.1"
+    "mdast-util-gfm-table": "1.0.1"
   },
   "peerDependencies": {
     "mdast-util-gfm-table": "^1.0.1"
