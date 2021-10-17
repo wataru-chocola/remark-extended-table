@@ -11,7 +11,7 @@ const process = (md: string) =>
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
-    .use(remarkRehype, {
+    .use(remarkRehype, null, {
       handlers: { table: extendedTableHandler },
     })
     .use(rehypeStringify)

@@ -43,7 +43,8 @@
     "micromark-extension-gfm-table": "^1.0.2"
   },
   "peerDependencies": {
-    "micromark": "^3.0.5"
+    "micromark": "^3.0.5",
+    "micromark-extension-gfm-table": "^1.0.2"
   },
   "keywords": [
     "micromark",
