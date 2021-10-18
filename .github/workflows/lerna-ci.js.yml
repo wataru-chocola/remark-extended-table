@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install --no-save lerna
+    - run: npm install --no-save --no-package-lock lerna
     - run: lerna bootstrap
     - run: lerna run test --stream
