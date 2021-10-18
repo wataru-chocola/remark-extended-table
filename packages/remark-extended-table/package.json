@@ -52,7 +52,6 @@
     "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
-    "prepublish": "npm run rebuild",
     "clean": "rimraf index.js index.test.js lib/*.js"
   }
 }

@@ -2,5 +2,8 @@
   "packages": [
     "packages/*"
   ],
+  "bootstrap": {
+    "npmClientArgs": ["--no-optional"]
+  },
   "version": "independent"
 }
