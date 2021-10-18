@@ -77,7 +77,7 @@ test('colspan marker', () => {
   expect(result).toEqual(expected.trimLeft());
 });
 
-test.only('rowspan marker with text', () => {
+test('rowspan marker with text', () => {
   const result = parseWithDevHtml(`
 | a | b |
 |---|---|
