@@ -25,7 +25,7 @@ $ npm install remark-extended-table
 ## Use
 
 ```typescript
-import { remarkExtendedTable, extendedTableHandler } from 'remark-extended-table';
+import { remarkExtendedTable, extendedTableHandlers } from 'remark-extended-table';
 
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -45,9 +45,7 @@ const process = (md: string) =>
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
-    .use(remarkRehype, null, {
-      handlers: { table: extendedTableHandler },
-    })
+    .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
     .use(rehypeStringify)
     .process(md);
 ```
