@@ -1,11 +1,6 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
-import type {
-  Root,
-  Text,
-  Table as MdastTable,
-  TableRow as MdastTableRow,
-  TableCell as MdastTableCell,
-} from 'mdast';
+import type { Root, Text } from 'mdast';
+import type { Table, TableRow, TableCell } from './types';
 import type { Node } from 'unist';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
@@ -22,19 +17,6 @@ export const extendedTableFromMarkdown = {
     tableData: exitCell,
   },
   transforms: [transformTable],
-};
-
-type Table = Omit<MdastTable, 'children'> & {
-  children: Array<TableRow>;
-};
-
-type TableRow = Omit<MdastTableRow, 'children'> & {
-  children: Array<TableCell>;
-};
-
-type TableCell = MdastTableCell & {
-  colspan?: number;
-  rowspan?: number;
 };
 
 interface TableCellColspanNode extends Node {

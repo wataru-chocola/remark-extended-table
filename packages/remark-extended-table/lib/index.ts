@@ -1,7 +1,7 @@
 import type { Processor } from 'unified';
 import { extendedTable } from 'micromark-extension-extended-table';
 import { extendedTableFromMarkdown } from 'mdast-util-extended-table';
-export { extendedTableHandler } from './mdast-to-hast';
+export { extendedTableHandler, extendedTableHandlers } from 'mdast-util-extended-table';
 
 export function remarkExtendedTable(this: Processor): void {
   const data = this.data();
