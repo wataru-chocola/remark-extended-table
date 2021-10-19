@@ -3,7 +3,9 @@ import { u } from 'unist-builder';
 import { pointStart, pointEnd } from 'unist-util-position';
 import type { ElementContent as Content } from 'hast';
 
-export const extendedTableHandler: Handler = (h, node) => {
+import type { Table } from './types';
+
+export const extendedTableHandler: Handler = (h, node: Table) => {
   const rows = node.children;
   const align = node.align || [];
   const result = [];
@@ -56,3 +58,7 @@ function wrap(nodes: Array<Content>): Array<Content> {
 
   return result;
 }
+
+export const extendedTableHandlers = {
+  table: extendedTableHandler,
+};

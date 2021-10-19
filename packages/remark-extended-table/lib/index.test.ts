@@ -1,4 +1,4 @@
-import { remarkExtendedTable, extendedTableHandler } from './index';
+import { remarkExtendedTable, extendedTableHandlers } from './index';
 
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -11,9 +11,7 @@ const process = (md: string) =>
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
-    .use(remarkRehype, null, {
-      handlers: { table: extendedTableHandler },
-    })
+    .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
     .use(rehypeStringify)
     .process(md);
 
