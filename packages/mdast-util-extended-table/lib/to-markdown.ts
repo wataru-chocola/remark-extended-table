@@ -59,8 +59,8 @@ const handleCellRowspan: Handle = (_node, _parent, _context) => {
 
 export const extendedTableToMarkdown: Options = {
   unsafe: [
-    { character: '^', atBreak: true, inConstruct: ['tableCell'] },
-    { character: '>', atBreak: true, inConstruct: ['tableCell'] },
+    { character: '^', inConstruct: ['tableCell'] },
+    { character: '>', inConstruct: ['tableCell'] },
   ],
   handlers: {
     table: tableHandler,

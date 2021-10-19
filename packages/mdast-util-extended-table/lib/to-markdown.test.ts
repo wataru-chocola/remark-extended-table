@@ -7,7 +7,7 @@ const compile = (mdast: any) =>
     extensions: [gfmTableToMarkdown(), extendedTableToMarkdown],
   });
 
-test('mdast -> markdown', () => {
+test('simple rowspan', () => {
   const mdast = {
     type: 'root',
     children: [
@@ -59,6 +59,150 @@ test('mdast -> markdown', () => {
 | - | - |
 | 1 | 2 |
 | ^ | 3 |
+`;
+  const result = compile(mdast);
+  expect(result).toEqual(md);
+});
+
+test('rowspan and colspan', () => {
+  const mdast = {
+    type: 'root',
+    children: [
+      {
+        type: 'table',
+        align: [null, null, null, null],
+        children: [
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'a' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'b' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'c' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'd' }],
+              },
+            ],
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                rowspan: 3,
+                colspan: 3,
+                children: [{ type: 'text', value: '1' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '2' }],
+              },
+            ],
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '3' }],
+              },
+            ],
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '4' }],
+              },
+            ],
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '5' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '6' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '7' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '8' }],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+  const md = `| a | b | c | d |
+| - | - | - | - |
+| > | > | 1 | 2 |
+| ^ | ^ | ^ | 3 |
+| ^ | ^ | ^ | 4 |
+| 5 | 6 | 7 | 8 |
+`;
+  const result = compile(mdast);
+  expect(result).toEqual(md);
+});
+
+test('escape unsafe', () => {
+  const mdast = {
+    type: 'root',
+    children: [
+      {
+        type: 'table',
+        align: [null, null],
+        children: [
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'a' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'b' }],
+              },
+            ],
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '^' }],
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '>' }],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+  const md = `| a  | b  |
+| -- | -- |
+| \\^ | \\> |
 `;
   const result = compile(mdast);
   expect(result).toEqual(md);
