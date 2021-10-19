@@ -1,7 +1,6 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
 import type { Root, Text } from 'mdast';
-import type { Table, TableRow, TableCell } from './types';
-import type { Node } from 'unist';
+import type { Table, TableCell, TableCellColspanNode, TableCellRowspanNode } from './types';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
@@ -18,14 +17,6 @@ export const extendedTableFromMarkdown = {
   },
   transforms: [transformTable],
 };
-
-interface TableCellColspanNode extends Node {
-  type: 'tableCellColspan';
-}
-
-interface TableCellRowspanNode extends Node {
-  type: 'tableCellRowspan';
-}
 
 function enterCell(this: CompileContext, token: Token): void {
   this.enter<TableCell>({ type: 'tableCell', children: [] }, token);
