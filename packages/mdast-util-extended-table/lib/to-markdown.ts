@@ -2,6 +2,8 @@ import type { Handle } from 'mdast-util-to-markdown';
 import { gfmTableToMarkdown, Options as gfmTableToMarkdownOptions } from 'mdast-util-gfm-table';
 import type { Table, TableCell } from './types';
 
+export type extendedTableToMarkdownOptions = gfmTableToMarkdownOptions;
+
 function makeColspanCellNode(): TableCell {
   return {
     type: 'tableCell',
@@ -18,7 +20,7 @@ function makeRowspanCellNode(): TableCell {
   };
 }
 
-export const extendedTableToMarkdown = (options?: gfmTableToMarkdownOptions) => {
+export const extendedTableToMarkdown = (options?: extendedTableToMarkdownOptions) => {
   const tableHandler: Handle = (node: Table, parent, context, safeOptions) => {
     for (let i = 1; i < node.children.length; i++) {
       const row = node.children[i];
