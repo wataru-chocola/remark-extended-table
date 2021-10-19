@@ -4,7 +4,7 @@ import { toMarkdown } from 'mdast-util-to-markdown';
 
 const compile = (mdast: any) =>
   toMarkdown(mdast, {
-    extensions: [gfmTableToMarkdown(), extendedTableToMarkdown],
+    extensions: [gfmTableToMarkdown(), extendedTableToMarkdown()],
   });
 
 test('simple rowspan', () => {
