@@ -2,6 +2,7 @@ import type { Processor } from 'unified';
 import { extendedTable } from 'micromark-extension-extended-table';
 import {
   extendedTableFromMarkdown,
+  extendedTableFromMarkdownOptions,
   extendedTableToMarkdown,
   extendedTableToMarkdownOptions,
 } from 'mdast-util-extended-table';
@@ -9,12 +10,12 @@ export { extendedTableHandler, extendedTableHandlers } from 'mdast-util-extended
 
 export function remarkExtendedTable(
   this: Processor,
-  options?: extendedTableToMarkdownOptions,
+  options?: extendedTableToMarkdownOptions & extendedTableFromMarkdownOptions,
 ): void {
   const data = this.data();
 
   add('micromarkExtensions', extendedTable);
-  add('fromMarkdownExtensions', extendedTableFromMarkdown);
+  add('fromMarkdownExtensions', extendedTableFromMarkdown(options));
   add('toMarkdownExtensions', extendedTableToMarkdown(options));
 
   function add(field: string, value: any) {

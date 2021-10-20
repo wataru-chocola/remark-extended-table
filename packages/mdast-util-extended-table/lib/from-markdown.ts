@@ -11,11 +11,11 @@ import type {
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
-export interface Options {
+export interface extendedTableFromMarkdownOptions {
   colspanWithEmpty?: boolean;
 }
 
-export const extendedTableFromMarkdown = (options?: Options) => {
+export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOptions) => {
   return {
     enter: {
       [types.extendedTableCellColspanMarker]: enterColspanMarker,
@@ -38,7 +38,10 @@ export const extendedTableFromMarkdown = (options?: Options) => {
   function enterColspanMarker(this: CompileContext, token: Token): void {
     if (this.getData('inTableCell')) {
       // @ts-ignore
-      this.enter<TableCellColspanNode>({ type: mdastTypes.tableCellColspanWithRight }, token);
+      this.enter<TableCellColspanWithRightNode>(
+        { type: mdastTypes.tableCellColspanWithRight },
+        token,
+      );
     } else {
       this.enter({ type: 'text', value: '>' }, token);
     }

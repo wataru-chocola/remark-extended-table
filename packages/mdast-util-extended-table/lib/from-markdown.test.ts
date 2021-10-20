@@ -1,10 +1,10 @@
 import { fromMarkdown } from 'mdast-util-from-markdown';
-import { extendedTableFromMarkdown, Options } from './from-markdown';
+import { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown';
 import { extendedTable } from 'micromark-extension-extended-table';
 import { gfmTable } from 'micromark-extension-gfm-table';
 import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';
 
-const compile = (md: string, options?: Options) =>
+const compile = (md: string, options?: extendedTableFromMarkdownOptions) =>
   fromMarkdown(md, {
     extensions: [gfmTable, extendedTable],
     mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown(options)],
@@ -369,7 +369,7 @@ test('greaterThan marker in text', () => {
   expect(result).toEqual(mdast);
 });
 
-test.only('empty cell colspan', () => {
+test('empty cell colspan', () => {
   const md = `
 | a | b |
 |---|---|
@@ -538,7 +538,7 @@ test.only('empty cell colspan', () => {
   expect(result).toEqual(mdast);
 });
 
-test.only('not empty cell colspan', () => {
+test('not empty cell colspan', () => {
   const md = `
  a | b 
 ---|---
