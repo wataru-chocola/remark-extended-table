@@ -5,6 +5,12 @@ import type {
 } from 'mdast';
 import type { Node } from 'unist';
 
+export const mdastTypes = {
+  tableCellColspanWithRight: 'tableCellColspanWithRight',
+  tableCellColspanWithLeft: 'tableCellColspanWithLeft',
+  tableCellRowspan: 'tableCellRowspan',
+};
+
 export type Table = Omit<MdastTable, 'children'> & {
   children: Array<TableRow>;
 };
@@ -18,8 +24,12 @@ export type TableCell = MdastTableCell & {
   rowspan?: number;
 };
 
-export interface TableCellColspanNode extends Node {
-  type: 'tableCellColspan';
+export interface TableCellColspanWithRightNode extends Node {
+  type: 'tableCellColspanWithRight';
+}
+
+export interface TableCellColspanWithLeftNode extends Node {
+  type: 'tableCellColspanWithLeft';
 }
 
 export interface TableCellRowspanNode extends Node {
