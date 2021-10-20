@@ -8,10 +8,9 @@ import {
 } from 'mdast-util-extended-table';
 export { extendedTableHandler, extendedTableHandlers } from 'mdast-util-extended-table';
 
-export function remarkExtendedTable(
-  this: Processor,
-  options?: extendedTableToMarkdownOptions & extendedTableFromMarkdownOptions,
-): void {
+export type Options = extendedTableToMarkdownOptions & extendedTableFromMarkdownOptions;
+
+export function remarkExtendedTable(this: Processor, options?: Options): void {
   const data = this.data();
 
   add('micromarkExtensions', extendedTable);

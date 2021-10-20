@@ -75,6 +75,16 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
 
   function transformTable(tree: Root): Root {
     visit(tree, 'table', (node: Table) => {
+      // create empty cell node
+      if (node.align) {
+        for (let row of node.children) {
+          for (let i = 0; i < node.align.length - row.children.length; i++) {
+            row.children.push(makeCell());
+          }
+        }
+      }
+
+      // process span markers
       const toBeDeleted: Array<[number, number]> = [];
       processTableCell(node, (cell: TableCell, i: number, j: number) => {
         const row = node.children[i];
@@ -111,6 +121,13 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
     return tree;
   }
 };
+
+function makeCell(): TableCell {
+  return {
+    type: 'tableCell',
+    children: [],
+  };
+}
 
 function makeTextFromCell(cell: TableCell): void {
   const value = isCellColspanWithRight(cell) ? '>' : '^';

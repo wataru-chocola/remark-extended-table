@@ -618,10 +618,10 @@ test('not empty cell colspan', () => {
               {
                 type: 'tableCell',
                 children: [],
-                position: {
-                  start: { column: 5, line: 4, offset: 21 },
-                  end: { column: 6, line: 4, offset: 22 },
-                },
+                //position: {
+                //  start: { column: 5, line: 4, offset: 21 },
+                //  end: { column: 6, line: 4, offset: 22 },
+                //},
               },
             ],
             position: {

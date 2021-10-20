@@ -1,4 +1,4 @@
-import { remarkExtendedTable, extendedTableHandlers } from './index';
+import { remarkExtendedTable, extendedTableHandlers, Options } from './index';
 
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -6,11 +6,11 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 
-const process = (md: string) =>
+const process = (md: string, options?: Options) =>
   unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkExtendedTable)
+    .use(remarkExtendedTable, options)
     .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
     .use(rehypeStringify)
     .process(md);
@@ -128,6 +128,93 @@ test('marker at end', () => {
 </tr>
 <tr>
 <td>6</td>
+</tr>
+</tbody>
+</table>`;
+  process(md).then((result) => expect(result.value).toBe(html));
+});
+
+test('span with empty cell', () => {
+  const md = `
+| a | b |
+|---|---|
+| 1    ||
+| 2 | 3 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2">1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>`;
+  process(md, { colspanWithEmpty: true }).then((result) => expect(result.value).toBe(html));
+});
+
+test('no span with empty cell', () => {
+  const md = `
+| a | b |
+|---|---|
+| 1    ||
+| 2 | 3 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>`;
+  process(md).then((result) => expect(result.value).toBe(html));
+});
+
+test('edge case: empty cell merged with below cell', () => {
+  const md = `
+a | b
+--|--
+1 |
+2 |
+3 | ^
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2"></td>
+</tr>
+<tr>
+<td>3</td>
 </tr>
 </tbody>
 </table>`;
