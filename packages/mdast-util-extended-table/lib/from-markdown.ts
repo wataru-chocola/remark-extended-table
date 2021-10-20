@@ -4,94 +4,93 @@ import type { Table, TableCell, TableCellColspanNode, TableCellRowspanNode } fro
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
-export const extendedTableFromMarkdown = {
-  enter: {
-    [types.extendedTableCellColspanMarker]: enterColspanMarker,
-    [types.extendedTableCellRowspanMarker]: enterRowspanMarker,
-    tableData: enterCell,
-  },
-  exit: {
-    [types.extendedTableCellColspanMarker]: exit,
-    [types.extendedTableCellRowspanMarker]: exit,
-    tableData: exitCell,
-  },
-  transforms: [transformTable],
-};
-
-function enterCell(this: CompileContext, token: Token): void {
-  this.enter<TableCell>({ type: 'tableCell', children: [] }, token);
-  this.setData('inTableCell', true);
+export interface Options {
+  colspanWithEmpty?: boolean;
 }
 
-function enterColspanMarker(this: CompileContext, token: Token): void {
-  if (this.getData('inTableCell')) {
-    // @ts-ignore
-    this.enter<TableCellColspanNode>({ type: 'tableCellColspan' }, token);
-  } else {
-    this.enter({ type: 'text', value: '>' }, token);
+export const extendedTableFromMarkdown = (options?: Options) => {
+  return {
+    enter: {
+      [types.extendedTableCellColspanMarker]: enterColspanMarker,
+      [types.extendedTableCellRowspanMarker]: enterRowspanMarker,
+      tableData: enterCell,
+    },
+    exit: {
+      [types.extendedTableCellColspanMarker]: exit,
+      [types.extendedTableCellRowspanMarker]: exit,
+      tableData: exitCell,
+    },
+    transforms: [transformTable],
+  };
+
+  function enterCell(this: CompileContext, token: Token): void {
+    this.enter<TableCell>({ type: 'tableCell', children: [] }, token);
+    this.setData('inTableCell', true);
   }
-}
 
-function enterRowspanMarker(this: CompileContext, token: Token): void {
-  if (this.getData('inTableCell')) {
-    // @ts-ignore
-    this.enter<TableCellRowspanNode>({ type: 'tableCellRowspan' }, token);
-  } else {
-    this.enter({ type: 'text', value: '^' }, token);
+  function enterColspanMarker(this: CompileContext, token: Token): void {
+    if (this.getData('inTableCell')) {
+      // @ts-ignore
+      this.enter<TableCellColspanNode>({ type: 'tableCellColspan' }, token);
+    } else {
+      this.enter({ type: 'text', value: '>' }, token);
+    }
   }
-}
 
-function exitCell(this: CompileContext, token: Token): void {
-  this.exit(token);
-  this.setData('inTableCell');
-}
+  function enterRowspanMarker(this: CompileContext, token: Token): void {
+    if (this.getData('inTableCell')) {
+      // @ts-ignore
+      this.enter<TableCellRowspanNode>({ type: 'tableCellRowspan' }, token);
+    } else {
+      this.enter({ type: 'text', value: '^' }, token);
+    }
+  }
 
-function exit(this: CompileContext, token: Token): void {
-  this.exit(token);
-}
+  function exitCell(this: CompileContext, token: Token): void {
+    this.exit(token);
+    this.setData('inTableCell');
+  }
 
-function transformTable(tree: Root): Root {
-  visit(tree, 'table', (node: Table) => {
-    const toBeDeleted: Array<[number, number]> = [];
-    processTableCell(node, (cell: TableCell, i: number, j: number) => {
-      const row = node.children[i];
-      if (isCellColspan(cell)) {
-        if (j >= row.children.length - 1) {
-          makeTextFromCell(cell);
-        } else {
-          row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
-          toBeDeleted.push([i, j]);
-        }
-      } else if (isCellRowspan(cell)) {
-        if (i <= 1) {
-          makeTextFromCell(cell);
-        } else {
-          const prev_row = node.children[i - 1];
-          prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
-          toBeDeleted.push([i, j]);
-        }
-      } else if (cell.children.length === 0) {
-        if (j >= 1) {
-          if (
-            cell.position != null &&
-            cell.position.end.offset != null &&
-            cell.position.start.offset != null &&
-            cell.position.end.offset - cell.position.start.offset <= 1
-          ) {
+  function exit(this: CompileContext, token: Token): void {
+    this.exit(token);
+  }
+
+  function transformTable(tree: Root): Root {
+    visit(tree, 'table', (node: Table) => {
+      const toBeDeleted: Array<[number, number]> = [];
+      processTableCell(node, (cell: TableCell, i: number, j: number) => {
+        const row = node.children[i];
+        if (isCellColspan(cell)) {
+          if (j >= row.children.length - 1) {
+            makeTextFromCell(cell);
+          } else {
+            row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+            toBeDeleted.push([i, j]);
+          }
+        } else if (isCellRowspan(cell)) {
+          if (i <= 1) {
+            makeTextFromCell(cell);
+          } else {
+            const prev_row = node.children[i - 1];
+            prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
+            toBeDeleted.push([i, j]);
+          }
+        } else if (options?.colspanWithEmpty && isCellEmplicitlyEmpty(cell)) {
+          if (j >= 1) {
             row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
             toBeDeleted.push([i, j]);
           }
         }
+      });
+
+      for (let point of toBeDeleted) {
+        const [i, j] = point;
+        node.children[i].children.splice(j, 1);
       }
     });
-
-    for (let point of toBeDeleted) {
-      const [i, j] = point;
-      node.children[i].children.splice(j, 1);
-    }
-  });
-  return tree;
-}
+    return tree;
+  }
+};
 
 function makeTextFromCell(cell: TableCell): void {
   const value = isCellColspan(cell) ? '>' : '^';
@@ -131,4 +130,14 @@ function isCellRowspan(cell: TableCell): Boolean {
   const cellContent = cell.children[0];
   // @ts-ignore
   return cellContent.type === 'tableCellRowspan';
+}
+
+function isCellEmplicitlyEmpty(cell: TableCell): Boolean {
+  return (
+    cell.children.length === 0 &&
+    cell.position != null &&
+    cell.position.end.offset != null &&
+    cell.position.start.offset != null &&
+    cell.position.end.offset - cell.position.start.offset === 1
+  );
 }

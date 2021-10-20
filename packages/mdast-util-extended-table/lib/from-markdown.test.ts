@@ -1,13 +1,13 @@
 import { fromMarkdown } from 'mdast-util-from-markdown';
-import { extendedTableFromMarkdown } from './from-markdown';
+import { extendedTableFromMarkdown, Options } from './from-markdown';
 import { extendedTable } from 'micromark-extension-extended-table';
 import { gfmTable } from 'micromark-extension-gfm-table';
 import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';
 
-const compile = (md: string) =>
+const compile = (md: string, options?: Options) =>
   fromMarkdown(md, {
     extensions: [gfmTable, extendedTable],
-    mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown],
+    mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown(options)],
   });
 
 test('simple rowspan', () => {
@@ -534,6 +534,6 @@ test('empty cell colspan', () => {
       end: { column: 1, line: 7, offset: 51 },
     },
   };
-  const result = compile(md);
+  const result = compile(md, { colspanWithEmpty: true });
   expect(result).toEqual(mdast);
 });
