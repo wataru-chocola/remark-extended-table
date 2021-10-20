@@ -369,7 +369,7 @@ test('greaterThan marker in text', () => {
   expect(result).toEqual(mdast);
 });
 
-test('empty cell colspan', () => {
+test.only('empty cell colspan', () => {
   const md = `
 | a | b |
 |---|---|
@@ -532,6 +532,156 @@ test('empty cell colspan', () => {
     position: {
       start: { column: 1, line: 1, offset: 0 },
       end: { column: 1, line: 7, offset: 51 },
+    },
+  };
+  const result = compile(md, { colspanWithEmpty: true });
+  expect(result).toEqual(mdast);
+});
+
+test.only('not empty cell colspan', () => {
+  const md = `
+ a | b 
+---|---
+ 1 | 
+ 2 |\\|
+`;
+  const mdast = {
+    type: 'root',
+    children: [
+      {
+        type: 'table',
+        align: [null, null],
+        children: [
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: 'a',
+                    position: {
+                      start: { column: 2, line: 2, offset: 2 },
+                      end: { column: 3, line: 2, offset: 3 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 2, line: 2, offset: 2 },
+                  end: { column: 5, line: 2, offset: 5 },
+                },
+              },
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: 'b',
+                    position: {
+                      start: { column: 6, line: 2, offset: 6 },
+                      end: { column: 7, line: 2, offset: 7 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 5, line: 2, offset: 5 },
+                  end: { column: 8, line: 2, offset: 8 },
+                },
+              },
+            ],
+            position: {
+              start: { column: 2, line: 2, offset: 2 },
+              end: { column: 8, line: 2, offset: 8 },
+            },
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: '1',
+                    position: {
+                      start: { column: 2, line: 4, offset: 18 },
+                      end: { column: 3, line: 4, offset: 19 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 2, line: 4, offset: 18 },
+                  end: { column: 5, line: 4, offset: 21 },
+                },
+              },
+              {
+                type: 'tableCell',
+                children: [],
+                position: {
+                  start: { column: 5, line: 4, offset: 21 },
+                  end: { column: 6, line: 4, offset: 22 },
+                },
+              },
+            ],
+            position: {
+              start: { column: 2, line: 4, offset: 18 },
+              end: { column: 6, line: 4, offset: 22 },
+            },
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: '2',
+                    position: {
+                      start: { column: 2, line: 5, offset: 24 },
+                      end: { column: 3, line: 5, offset: 25 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 2, line: 5, offset: 24 },
+                  end: { column: 5, line: 5, offset: 27 },
+                },
+              },
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: '|',
+                    position: {
+                      start: { column: 5, line: 5, offset: 27 },
+                      end: { column: 7, line: 5, offset: 29 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 5, line: 5, offset: 27 },
+                  end: { column: 7, line: 5, offset: 29 },
+                },
+              },
+            ],
+            position: {
+              start: { column: 2, line: 5, offset: 24 },
+              end: { column: 7, line: 5, offset: 29 },
+            },
+          },
+        ],
+        position: {
+          start: { column: 2, line: 2, offset: 2 },
+          end: { column: 7, line: 5, offset: 29 },
+        },
+      },
+    ],
+    position: {
+      start: { column: 1, line: 1, offset: 0 },
+      end: { column: 1, line: 6, offset: 30 },
     },
   };
   const result = compile(md, { colspanWithEmpty: true });

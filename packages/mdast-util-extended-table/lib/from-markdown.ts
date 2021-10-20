@@ -1,6 +1,13 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
 import type { Root, Text } from 'mdast';
-import type { Table, TableCell, TableCellColspanNode, TableCellRowspanNode } from './types';
+import { mdastTypes } from './types';
+import type {
+  Table,
+  TableCell,
+  TableCellColspanWithRightNode,
+  TableCellColspanWithLeftNode,
+  TableCellRowspanNode,
+} from './types';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
@@ -31,7 +38,7 @@ export const extendedTableFromMarkdown = (options?: Options) => {
   function enterColspanMarker(this: CompileContext, token: Token): void {
     if (this.getData('inTableCell')) {
       // @ts-ignore
-      this.enter<TableCellColspanNode>({ type: 'tableCellColspan' }, token);
+      this.enter<TableCellColspanNode>({ type: mdastTypes.tableCellColspanWithRight }, token);
     } else {
       this.enter({ type: 'text', value: '>' }, token);
     }
@@ -40,13 +47,21 @@ export const extendedTableFromMarkdown = (options?: Options) => {
   function enterRowspanMarker(this: CompileContext, token: Token): void {
     if (this.getData('inTableCell')) {
       // @ts-ignore
-      this.enter<TableCellRowspanNode>({ type: 'tableCellRowspan' }, token);
+      this.enter<TableCellRowspanNode>({ type: mdastTypes.tableCellRowspan }, token);
     } else {
       this.enter({ type: 'text', value: '^' }, token);
     }
   }
 
   function exitCell(this: CompileContext, token: Token): void {
+    if (this.sliceSerialize(token) === '|') {
+      // @ts-ignore
+      this.enter<TableCellColspanWithLeftNode>(
+        { type: mdastTypes.tableCellColspanWithLeft },
+        token,
+      );
+      this.exit(token);
+    }
     this.exit(token);
     this.setData('inTableCell');
   }
@@ -60,7 +75,7 @@ export const extendedTableFromMarkdown = (options?: Options) => {
       const toBeDeleted: Array<[number, number]> = [];
       processTableCell(node, (cell: TableCell, i: number, j: number) => {
         const row = node.children[i];
-        if (isCellColspan(cell)) {
+        if (isCellColspanWithRight(cell)) {
           if (j >= row.children.length - 1) {
             makeTextFromCell(cell);
           } else {
@@ -93,7 +108,7 @@ export const extendedTableFromMarkdown = (options?: Options) => {
 };
 
 function makeTextFromCell(cell: TableCell): void {
-  const value = isCellColspan(cell) ? '>' : '^';
+  const value = isCellColspanWithRight(cell) ? '>' : '^';
   const text: Text = {
     type: 'text',
     value: value,
@@ -114,13 +129,13 @@ function processTableCell(
   }
 }
 
-function isCellColspan(cell: TableCell): Boolean {
+function isCellColspanWithRight(cell: TableCell): Boolean {
   if (cell.children.length !== 1) {
     return false;
   }
   const cellContent = cell.children[0];
   // @ts-ignore
-  return cellContent.type === 'tableCellColspan';
+  return cellContent.type === mdastTypes.tableCellColspanWithRight;
 }
 
 function isCellRowspan(cell: TableCell): Boolean {
@@ -129,15 +144,9 @@ function isCellRowspan(cell: TableCell): Boolean {
   }
   const cellContent = cell.children[0];
   // @ts-ignore
-  return cellContent.type === 'tableCellRowspan';
+  return cellContent.type === mdastTypes.tableCellRowspan;
 }
 
 function isCellEmplicitlyEmpty(cell: TableCell): Boolean {
-  return (
-    cell.children.length === 0 &&
-    cell.position != null &&
-    cell.position.end.offset != null &&
-    cell.position.start.offset != null &&
-    cell.position.end.offset - cell.position.start.offset === 1
-  );
+  return cell.children.length === 1 && cell.children[0].type == mdastTypes.tableCellColspanWithLeft;
 }
