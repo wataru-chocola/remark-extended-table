@@ -4,12 +4,12 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import remarkGfm from 'remark-gfm';
+import remarkGfm, { Options as gfmOptions } from 'remark-gfm';
 
-const process = (md: string, options?: Options) =>
+const process = (md: string, options?: Options, gfmOptions?: gfmOptions) =>
   unified()
     .use(remarkParse)
-    .use(remarkGfm)
+    .use(remarkGfm, gfmOptions)
     .use(remarkExtendedTable, options)
     .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
     .use(rehypeStringify)
