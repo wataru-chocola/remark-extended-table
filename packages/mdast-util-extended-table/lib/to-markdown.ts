@@ -1,6 +1,6 @@
 import type { Handle } from 'mdast-util-to-markdown';
 import { gfmTableToMarkdown, Options as gfmTableToMarkdownOptions } from 'mdast-util-gfm-table';
-import type { Table, TableCell } from './types';
+import type { Table, TableCell } from './types.js';
 
 export type extendedTableToMarkdownOptions = gfmTableToMarkdownOptions;
 

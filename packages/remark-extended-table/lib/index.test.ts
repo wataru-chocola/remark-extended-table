@@ -1,4 +1,4 @@
-import { remarkExtendedTable, extendedTableHandlers, Options } from './index';
+import { remarkExtendedTable, extendedTableHandlers, Options } from './index.js';
 
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';

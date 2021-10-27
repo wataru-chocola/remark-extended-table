@@ -1,4 +1,4 @@
-export { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown';
-export { extendedTableToMarkdown, extendedTableToMarkdownOptions } from './to-markdown';
-export { extendedTableHandler, extendedTableHandlers } from './mdast-to-hast';
-export { Table, TableRow, TableCell } from './types';
+export { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown.js';
+export { extendedTableToMarkdown, extendedTableToMarkdownOptions } from './to-markdown.js';
+export { extendedTableHandler, extendedTableHandlers } from './mdast-to-hast.js';
+export { Table, TableRow, TableCell } from './types.js';

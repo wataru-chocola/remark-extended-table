@@ -1,13 +1,13 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
 import type { Root, Text } from 'mdast';
-import { mdastTypes } from './types';
+import { mdastTypes } from './types.js';
 import type {
   Table,
   TableCell,
   TableCellColspanWithRightNode,
   TableCellColspanWithLeftNode,
   TableCellRowspanNode,
-} from './types';
+} from './types.js';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
