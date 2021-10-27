@@ -15,7 +15,7 @@ const process = (md: string, options?: Options, gfmOptions?: gfmOptions) =>
     .use(rehypeStringify)
     .process(md);
 
-test('simple rowspan', () => {
+test('simple rowspan', async () => {
   const md = `
 | a | b |
 |---|---|
@@ -39,10 +39,10 @@ test('simple rowspan', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
 });
 
-test('simple colspan', () => {
+test('simple colspan', async () => {
   const md = `
 | a | b |
 |---|---|
@@ -66,10 +66,10 @@ test('simple colspan', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
 });
 
-test('marker at end', () => {
+test('marker at end', async () => {
   const md = `
 | a | b |
 |---|---|
@@ -94,10 +94,10 @@ test('marker at end', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
 });
 
-test('marker at end', () => {
+test('marker at end', async () => {
   const md = `
 | a | b | c |
 |---|---|---|
@@ -131,10 +131,10 @@ test('marker at end', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
 });
 
-test('span with empty cell', () => {
+test('span with empty cell', async () => {
   const md = `
 | a | b |
 |---|---|
@@ -158,10 +158,10 @@ test('span with empty cell', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md, { colspanWithEmpty: true }).then((result) => expect(result.value).toBe(html));
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
 });
 
-test('no span with empty cell', () => {
+test('no span with empty cell', async () => {
   const md = `
 | a | b |
 |---|---|
@@ -186,10 +186,10 @@ test('no span with empty cell', () => {
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
 });
 
-test('edge case: empty cell merged with below cell', () => {
+test('edge case: empty cell merged with below cell', async () => {
   const md = `
 a | b
 --|--
@@ -218,5 +218,31 @@ a | b
 </tr>
 </tbody>
 </table>`;
-  process(md).then((result) => expect(result.value).toBe(html));
+  expect((await process(md)).value).toBe(html);
+});
+
+test('edge case: conflict between colspanWithRight and colspanWithLeft', async () => {
+  const md = `
+| a | b | c | d |
+|---|---|---|---|
+| 1 | >    || 4 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td colspan="2"></td>
+<td>4</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
 });

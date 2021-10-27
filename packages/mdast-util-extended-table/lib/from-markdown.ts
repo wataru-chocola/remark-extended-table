@@ -57,7 +57,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
   }
 
   function exitCell(this: CompileContext, token: Token): void {
-    if (this.sliceSerialize(token) === '|') {
+    if (options?.colspanWithEmpty && this.sliceSerialize(token) === '|') {
       // @ts-ignore
       this.enter<TableCellColspanWithLeftNode>(
         { type: mdastTypes.tableCellColspanWithLeft },
@@ -104,9 +104,14 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
             toBeDeleted.push([i, j]);
           }
         } else if (isCellEmplicitlyEmpty(cell)) {
-          if (options?.colspanWithEmpty && j >= 1) {
-            row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
-            toBeDeleted.push([i, j]);
+          if (j >= 1) {
+            if (isCellColspanWithRight(row.children[j - 1])) {
+              // behave as a normal empty cell when conflicting with colspanWithRight marker
+              cell.children = [];
+            } else {
+              row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+              toBeDeleted.push([i, j]);
+            }
           } else {
             cell.children = [];
           }
