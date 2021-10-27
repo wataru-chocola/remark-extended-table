@@ -1,5 +1,5 @@
 import { fromMarkdown } from 'mdast-util-from-markdown';
-import { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown';
+import { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown.js';
 import { extendedTable } from 'micromark-extension-extended-table';
 import { gfmTable } from 'micromark-extension-gfm-table';
 import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';

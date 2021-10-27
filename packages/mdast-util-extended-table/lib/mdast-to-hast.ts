@@ -3,7 +3,7 @@ import { u } from 'unist-builder';
 import { pointStart, pointEnd } from 'unist-util-position';
 import type { ElementContent as Content } from 'hast';
 
-import type { Table } from './types';
+import type { Table } from './types.js';
 
 export const extendedTableHandler: Handler = (h, node: Table) => {
   const rows = node.children;
