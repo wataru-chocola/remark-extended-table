@@ -27,30 +27,40 @@ export const extendedTableToMarkdown = (options?: extendedTableToMarkdownOptions
 
       let j = 0;
       while (j < row.children.length) {
-        const cell = row.children[j];
+        const cell = node.children[i].children[j];
 
-        let offsetCol = 0;
-        if (cell.colspan != null && cell.colspan > 1) {
-          for (let k = 0; k < cell.colspan - 1; k++) {
-            row.children.splice(j, 0, makeColspanCellNode());
-            offsetCol += 1;
-          }
-        }
-
-        if (cell.rowspan != null && cell.rowspan > 1) {
-          for (let k = 0; k < cell.rowspan - 1; k++) {
-            const targetRow = node.children[i + k + 1];
-            for (let l = 0; l < (cell.colspan ? cell.colspan : 1); l++) {
-              targetRow.children.splice(j + l, 0, makeRowspanCellNode());
-            }
-          }
-        }
+        const offsetCol = expandColspan(node, cell, i, j);
+        expandRowspan(node, cell, i, j);
 
         j += 1 + offsetCol;
       }
     }
     return gfmTableToMarkdown(options).handlers!.table(node, parent, context, safeOptions);
   };
+
+  function expandColspan(table: Table, cell: TableCell, i: number, j: number): number {
+    let offsetCol = 0;
+    if (cell.colspan == null || cell.colspan <= 1) {
+      return offsetCol;
+    }
+    for (let k = 0; k < cell.colspan - 1; k++) {
+      table.children[i].children.splice(j, 0, makeColspanCellNode());
+      offsetCol += 1;
+    }
+    return offsetCol;
+  }
+
+  function expandRowspan(table: Table, cell: TableCell, i: number, j: number): void {
+    if (cell.rowspan == null || cell.rowspan <= 1) {
+      return;
+    }
+    for (let k = 0; k < cell.rowspan - 1; k++) {
+      const targetRow = table.children[i + k + 1];
+      for (let l = 0; l < (cell.colspan ? cell.colspan : 1); l++) {
+        targetRow.children.splice(j + l, 0, makeRowspanCellNode());
+      }
+    }
+  }
 
   const handleCellColspan: Handle = (_node, _parent, _context) => {
     return '>';
