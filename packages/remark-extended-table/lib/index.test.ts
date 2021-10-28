@@ -189,6 +189,35 @@ test('no span with empty cell', async () => {
   expect((await process(md)).value).toBe(html);
 });
 
+test('cell sandwiched between colspan markers', async () => {
+  const md = `
+| a | b | c |
+|---|---|---|
+| > | 1    ||
+| 2 | 3 | 4 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3">1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
+});
+
 test('edge case: empty cell merged with below cell', async () => {
   const md = `
 a | b

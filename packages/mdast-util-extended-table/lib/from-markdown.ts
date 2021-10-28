@@ -96,7 +96,8 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
             if (j >= row.children.length - 1) {
               marker2text(cell);
             } else {
-              row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+              row.children[j + 1].colspan =
+                (row.children[j + 1].colspan || 1) + (cell.colspan || 1);
               toBeDeleted.push([i, j]);
             }
             break;
@@ -106,7 +107,8 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
               marker2text(cell);
             } else {
               const prev_row = node.children[i - 1];
-              prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
+              prev_row.children[j].rowspan =
+                (prev_row.children[j].rowspan || 1) + (cell.rowspan || 1);
               toBeDeleted.push([i, j]);
             }
             break;
@@ -117,7 +119,8 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
                 // behave as a normal empty cell when conflicting with colspanWithRight marker
                 marker2text(cell);
               } else {
-                row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+                row.children[j - 1].colspan =
+                  (row.children[j - 1].colspan || 1) + (cell.colspan ? cell.colspan : 1);
                 toBeDeleted.push([i, j]);
               }
             } else {
