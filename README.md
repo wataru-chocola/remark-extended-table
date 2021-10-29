@@ -16,6 +16,45 @@
 [remark-gfm]: https://github.com/remarkjs/remark-gfm
 [micromark-extension-gfm-table]: https://github.com/micromark/micromark-extension-gfm-table
 
+
+## Warning
+
+This package overrides `remarkGfm` behaviors.
+If you encounter any problems, disable this first and see what happens.
+
+
+## Extended Table Syntax
+
+With extended table syntax, you can write table cell with colspan / rowspan using the following special cells.
+
+* cell containing only `>` (to be merged with the right cell)
+* cell containing only `^` (to be merged with the upper cell)
+
+```markdown
+| header1          | header2          |
+| ---------------- | ---------------- |
+| cell (rowspan=2) | cell             |
+| ^                | cell             |
+| >                | cell (colspan=2) |
+| escape >         | \>               |
+| escape ^         | \^               |
+```
+
+If set `colspanWithEmptyCell` option, you can use empty cell containing no spaces which merges with the left cell.
+For the purpose of avoiding unintentional merges, the followings are not merged.
+
+* Cell containing whitespaces
+* Cell without ending divider (`|`)
+
+```markdown
+| header1     | header2 |
+| ----------- | ------- |
+| cell (rowspan=2)     ||
+| normal cell |         |
+| normal cell |
+```
+
+
 ## Install
 
 ```
@@ -52,11 +91,32 @@ const process = (md: string) =>
 
 ## Packages
 
-`remark-extended-table` consists of the following packages.
+This repository contains the following packages.
 
 * [remark-extended-table](packages/remark-extended-table): [remark][] plugin
 * [micromark-extension-extended-table](packages/micromark-extension-extended-table): [micromark][] parser extension (only works with `remark-exended-table`)
 * [mdast-util-extended-table](packages/mdast-util-extended-table): [mdast][] utilities
+
+## API
+
+### `unified().use(remarkExtendedTable[, options])`
+
+Configures remark to parse extended table syntax.
+**This MUST be applied after `remarkGfm`**.
+
+
+#### `options`
+
+##### `extendedTableFromMarkdownOptions.colspanWithEmpty` (`boolean?`, default: `false`)
+
+Whether to merge cell with the right empty cell which contains no spaces (`||`).
+
+
+### `extendedTableHandlers`
+
+[mdast-util-to-hast] handlers, which you can set to `options.handlers` of `remarkRehype`.
+
+
 
 [micromark]: https://github.com/micromark/micromark
 [mdast]: https://github.com/syntax-tree/mdast
