@@ -19,6 +19,7 @@
     "dev/**/*.js",
     "dev/**/*.d.ts",
     "!dev/**/*.test.js",
+    "!dev/**/*.test.d.ts",
     "lib/**/*.js",
     "lib/**/*.d.ts",
     "!lib/**/*.test.js",
