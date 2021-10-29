@@ -69,6 +69,33 @@ test('simple colspan', async () => {
   expect((await process(md)).value).toBe(html);
 });
 
+test('span in header', async () => {
+  const md = `
+| > | ^ |
+|---|---|
+| 1 | 2 |
+| 3 | 4 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th colspan="2">^</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md)).value).toBe(html);
+});
+
 test('marker at end', async () => {
   const md = `
 | a | b |

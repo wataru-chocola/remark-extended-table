@@ -20,11 +20,13 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
     enter: {
       [types.extendedTableCellColspanMarker]: enterColspanMarker,
       [types.extendedTableCellRowspanMarker]: enterRowspanMarker,
+      tableHeader: enterCell,
       tableData: enterCell,
     },
     exit: {
       [types.extendedTableCellColspanMarker]: exit,
       [types.extendedTableCellRowspanMarker]: exit,
+      tableHeader: exitCell,
       tableData: exitCell,
     },
     transforms: [transformTable],
