@@ -20,11 +20,13 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
     enter: {
       [types.extendedTableCellColspanMarker]: enterColspanMarker,
       [types.extendedTableCellRowspanMarker]: enterRowspanMarker,
+      tableHeader: enterCell,
       tableData: enterCell,
     },
     exit: {
       [types.extendedTableCellColspanMarker]: exit,
       [types.extendedTableCellRowspanMarker]: exit,
+      tableHeader: exitCell,
       tableData: exitCell,
     },
     transforms: [transformTable],
@@ -88,33 +90,45 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
       const toBeDeleted: Array<[number, number]> = [];
       processTableCell(node, (cell: TableCell, i: number, j: number) => {
         const row = node.children[i];
-        if (isCellColspanWithRight(cell)) {
-          if (j >= row.children.length - 1) {
-            makeTextFromCell(cell);
-          } else {
-            row.children[j + 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
-            toBeDeleted.push([i, j]);
-          }
-        } else if (isCellRowspan(cell)) {
-          if (i <= 1) {
-            makeTextFromCell(cell);
-          } else {
-            const prev_row = node.children[i - 1];
-            prev_row.children[j].rowspan = 1 + (cell.rowspan ? cell.rowspan : 1);
-            toBeDeleted.push([i, j]);
-          }
-        } else if (isCellEmplicitlyEmpty(cell)) {
-          if (j >= 1) {
-            if (isCellColspanWithRight(row.children[j - 1])) {
-              // behave as a normal empty cell when conflicting with colspanWithRight marker
-              cell.children = [];
+        if (cell.children.length !== 1) {
+          return;
+        }
+        switch (cell.children[0].type) {
+          case mdastTypes.tableCellColspanWithRight:
+            if (j >= row.children.length - 1) {
+              marker2text(cell);
             } else {
-              row.children[j - 1].colspan = 1 + (cell.colspan ? cell.colspan : 1);
+              row.children[j + 1].colspan =
+                (row.children[j + 1].colspan || 1) + (cell.colspan || 1);
               toBeDeleted.push([i, j]);
             }
-          } else {
-            cell.children = [];
-          }
+            break;
+
+          case mdastTypes.tableCellRowspan:
+            if (i <= 1) {
+              marker2text(cell);
+            } else {
+              const prev_row = node.children[i - 1];
+              prev_row.children[j].rowspan =
+                (prev_row.children[j].rowspan || 1) + (cell.rowspan || 1);
+              toBeDeleted.push([i, j]);
+            }
+            break;
+
+          case mdastTypes.tableCellColspanWithLeft:
+            if (j >= 1) {
+              if (isCellColspanWithRight(row.children[j - 1])) {
+                // behave as a normal empty cell when conflicting with colspanWithRight marker
+                marker2text(cell);
+              } else {
+                row.children[j - 1].colspan =
+                  (row.children[j - 1].colspan || 1) + (cell.colspan ? cell.colspan : 1);
+                toBeDeleted.push([i, j]);
+              }
+            } else {
+              marker2text(cell);
+            }
+            break;
         }
       });
 
@@ -134,14 +148,34 @@ function makeCell(): TableCell {
   };
 }
 
-function makeTextFromCell(cell: TableCell): void {
-  const value = isCellColspanWithRight(cell) ? '>' : '^';
-  const text: Text = {
-    type: 'text',
-    value: value,
-    position: Object.assign({}, cell.children[0].position),
-  };
-  cell.children.splice(0, 1, text);
+function marker2text(cell: TableCell): void {
+  if (cell.children.length !== 1) {
+    return;
+  }
+  let text: string | null;
+  switch (cell.children[0].type) {
+    case mdastTypes.tableCellColspanWithRight:
+      text = '>';
+      break;
+    case mdastTypes.tableCellRowspan:
+      text = '^';
+      break;
+    case mdastTypes.tableCellColspanWithLeft:
+      text = null;
+      break;
+    default:
+      return;
+  }
+  if (text == null) {
+    cell.children.splice(0, 1);
+  } else {
+    const textNode: Text = {
+      type: 'text',
+      value: text,
+      position: Object.assign({}, cell.children[0].position),
+    };
+    cell.children.splice(0, 1, textNode);
+  }
 }
 
 function processTableCell(
@@ -163,17 +197,4 @@ function isCellColspanWithRight(cell: TableCell): Boolean {
   const cellContent = cell.children[0];
   // @ts-ignore
   return cellContent.type === mdastTypes.tableCellColspanWithRight;
-}
-
-function isCellRowspan(cell: TableCell): Boolean {
-  if (cell.children.length !== 1) {
-    return false;
-  }
-  const cellContent = cell.children[0];
-  // @ts-ignore
-  return cellContent.type === mdastTypes.tableCellRowspan;
-}
-
-function isCellEmplicitlyEmpty(cell: TableCell): Boolean {
-  return cell.children.length === 1 && cell.children[0].type == mdastTypes.tableCellColspanWithLeft;
 }

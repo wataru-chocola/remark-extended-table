@@ -68,7 +68,7 @@ test('colspan marker', () => {
 </thead>
 <tbody>
 <tr>
-<td>&gt;</td>
+<td>></td>
 <td>1</td>
 </tr>
 </tbody>
@@ -81,6 +81,7 @@ test('rowspan marker with text', () => {
   const result = parseWithDevHtml(`
 | a | b |
 |---|---|
+| > | ^ |
 | ^aaa | bbb^ |
 | ^*aaa* | *bbb*^ |
 `);
@@ -93,6 +94,10 @@ test('rowspan marker with text', () => {
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>*COLSPAN*</td>
+<td>*ROWSPAN*</td>
+</tr>
 <tr>
 <td>^aaa</td>
 <td>bbb^</td>

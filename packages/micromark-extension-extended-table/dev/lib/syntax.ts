@@ -49,6 +49,7 @@ function resolveAll(events: Event[], context: TokenizeContext): Event[] {
   debug('+ original events');
   debug(formatEvents(events));
 
+  // remove span marker if cell contains any other elements
   if (events.length >= 3) {
     const tokenType = events[0][1].type;
     assert(
@@ -84,6 +85,8 @@ function tokenizeExtendedTableCell(
 ): State {
   debug('initialize tokenizer');
   const self = this; // eslint-disable-line @typescript-eslint/no-this-alias
+
+  // expect the start in a cell
   if (self.events.length !== 0) {
     return nok;
   }
