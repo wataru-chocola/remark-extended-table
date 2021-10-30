@@ -1,0 +1,32 @@
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install --no-save --no-package-lock -g lerna
+      - run: lerna bootstrap --hoist --ci
+      - run: lerna run test --stream
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm install --no-save --no-package-lock -g lerna
+      - run: lerna bootstrap --hoist --ci
+      - run: lerna publish --yes from-git
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
