@@ -1,6 +1,6 @@
 {
   "name": "micromark-extension-extended-table",
-  "version": "1.0.0-1",
+  "version": "1.0.0",
   "description": "micromark extension to support table syntax allowing colspan/rowspan",
   "author": "Wataru Watanabe",
   "license": "MIT",
@@ -31,10 +31,10 @@
     "default": "./index.js"
   },
   "dependencies": {
+    "assert": "^2.0.0",
     "micromark-util-chunked": "^1.0.0",
     "micromark-util-symbol": "^1.0.0",
-    "micromark-util-types": "^1.0.1",
-    "assert": "^2.0.0"
+    "micromark-util-types": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "16.7.10",
