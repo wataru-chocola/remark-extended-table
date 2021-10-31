@@ -21,9 +21,11 @@
     "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
     "build": "npm run clean && tsc",
     "prepack": "npm run build",
-    "versionup": "lerna version --no-push --conventional-commits",
-    "versionup:push": "git push --tags",
-    "clean": "rimraf index.js index.test.js lib/*.js"
+    "clean": "rimraf index.js index.test.js lib/*.js",
+
+    "lerna:versionup": "lerna version --no-push --conventional-commits",
+    "lerna:versionup:push": "git push && git push --tags",
+    "lerna:publish": "lerna publish from-git"
   },
   "dependencies": {
   },
