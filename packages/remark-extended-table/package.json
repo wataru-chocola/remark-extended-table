@@ -48,9 +48,9 @@
     "lint": "eslint ./**/*.{ts}",
     "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
     "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
-    "build": "tsc",
+    "build": "tsc --build --verbose",
     "rebuild": "npm run clean && npm run build",
     "prepublish": "npm run rebuild",
-    "clean": "rimraf index.js index.test.js lib/*.js"
+    "clean": "rimraf lib/*{.js,.d.ts}"
   }
 }
