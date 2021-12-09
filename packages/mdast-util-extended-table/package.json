@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "hast-util-to-html": "8.0.3",
-    "mdast-util-gfm-table": "1.0.1",
+    "mdast-util-gfm-table": "1.0.2",
     "unist-util-inspect": "7.0.0"
   },
   "peerDependencies": {
