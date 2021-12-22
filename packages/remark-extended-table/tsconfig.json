@@ -9,6 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "moduleResolution": "node",
+    "composite": true
+  },
+  "references": [
+    {"path": "../micromark-extension-extended-table"},
+    {"path": "../mdast-util-extended-table"}
+  ]
 }
