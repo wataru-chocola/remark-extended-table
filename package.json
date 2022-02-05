@@ -18,10 +18,9 @@
     "format": "prettier --write \"./**/*.{ts,json}\"",
     "lint": "eslint ./**/*.{ts}",
     "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
-    "build": "npm run clean && tsc",
-    "prepack": "npm run build",
-    "clean": "rimraf index.js index.test.js lib/*.js",
+    "test": "lerna run test",
+    "build": "lerna bootstrap --hoist",
+    "clean": "lerna clean -y",
 
     "lerna:versionup": "lerna version --no-push --conventional-commits",
     "lerna:versionup:push": "git push && git push --tags",
