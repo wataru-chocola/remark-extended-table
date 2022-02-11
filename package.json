@@ -24,7 +24,9 @@
 
     "lerna:versionup": "lerna version --no-push --conventional-commits",
     "lerna:versionup:push": "git push && git push --tags",
-    "lerna:publish": "lerna publish from-git"
+    "lerna:publish": "lerna publish from-git",
+
+    "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
   },
@@ -40,5 +42,11 @@
     "prettier": "2.4.1",
     "rimraf": "3.0.2",
     "typescript": "4.4.4"
+  },
+  "resolutions": {
+    "pacote": "12.0.3"
+  },
+  "resolutionsComments": {
+    "pacote": "@lerna/command depends on pacote, which eventually depends on json-schema (CVE-2021-3918)"
   }
 }
