@@ -31,7 +31,7 @@
     "micromark-extension-extended-table": "^1.0.0"
   },
   "devDependencies": {
-    "rehype-stringify": "9.0.2",
+    "rehype-stringify": "9.0.3",
     "remark-gfm": "3.0.0",
     "remark-parse": "10.0.0",
     "remark-rehype": "10.0.0",
