@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "16.11.26",
-    "debug": "4.3.3",
+    "debug": "4.3.4",
     "micromark": "3.0.10",
     "micromark-build": "1.1.0",
     "micromark-extension-gfm-table": "1.0.5"
