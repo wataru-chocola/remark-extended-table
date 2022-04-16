@@ -82,7 +82,12 @@ const process = (md: string) =>
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
-    .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
+    .use(remarkRehype, null, {
+      handlers: {
+        // any other handlers
+        ...extendedTableHandlers,
+      }
+    })
     .use(rehypeStringify)
     .process(md);
 ```
