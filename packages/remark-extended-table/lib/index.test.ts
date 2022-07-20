@@ -302,3 +302,26 @@ test('edge case: conflict between colspanWithRight and colspanWithLeft', async (
 </table>`;
   expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
 });
+
+test('regression: more than 2 colspanWithRight is not working', async () => {
+  const md = `
+| a | b | c |
+| - | - | - |
+| > | > | 1 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3">1</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
+});

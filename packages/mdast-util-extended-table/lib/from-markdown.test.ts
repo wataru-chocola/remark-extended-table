@@ -687,3 +687,119 @@ test('not empty cell colspan', () => {
   const result = compile(md, { colspanWithEmpty: true });
   expect(result).toEqual(mdast);
 });
+
+test('regression: more than 2 colspanWithRight is not working', () => {
+  const md = `
+| a | b | c |
+| - | - | - |
+| > | > | 1 |
+`;
+  const mdast = {
+    type: 'root',
+    children: [
+      {
+        type: 'table',
+        align: [null, null, null],
+        children: [
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: 'a',
+                    position: {
+                      start: { column: 3, line: 2, offset: 3 },
+                      end: { column: 4, line: 2, offset: 4 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 1, line: 2, offset: 1 },
+                  end: { column: 6, line: 2, offset: 6 },
+                },
+              },
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: 'b',
+                    position: {
+                      start: { column: 7, line: 2, offset: 7 },
+                      end: { column: 8, line: 2, offset: 8 },
+                    },
+                  },
+                ],
+                position: {
+                  start: { column: 6, line: 2, offset: 6 },
+                  end: { column: 10, line: 2, offset: 10 },
+                },
+              },
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: 'c',
+                    position: {
+                      start: { column: 11, line: 2, offset: 11 },
+                      end: { column: 12, line: 2, offset: 12 },
+                    },
+                  },
+                ],
+                position: {
+                  end: { column: 14, line: 2, offset: 14 },
+                  start: { column: 10, line: 2, offset: 10 },
+                },
+              },
+            ],
+            position: {
+              start: { column: 1, line: 2, offset: 1 },
+              end: { column: 14, line: 2, offset: 14 },
+            },
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [
+                  {
+                    type: 'text',
+                    value: '1',
+                    position: {
+                      end: { column: 12, line: 4, offset: 40 },
+                      start: { column: 11, line: 4, offset: 39 },
+                    },
+                  },
+                ],
+                colspan: 3,
+                position: {
+                  start: { column: 10, line: 4, offset: 38 },
+                  end: { column: 14, line: 4, offset: 42 },
+                },
+              },
+            ],
+            position: {
+              start: { column: 1, line: 4, offset: 29 },
+              end: { column: 14, line: 4, offset: 42 },
+            },
+          },
+        ],
+        position: {
+          start: { column: 1, line: 2, offset: 1 },
+          end: { column: 14, line: 4, offset: 42 },
+        },
+      },
+    ],
+    position: {
+      start: { column: 1, line: 1, offset: 0 },
+      end: { column: 1, line: 5, offset: 43 },
+    },
+  };
+  const result = compile(md, { colspanWithEmpty: true });
+  expect(result).toEqual(mdast);
+});
