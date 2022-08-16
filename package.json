@@ -44,7 +44,7 @@
     "typescript": "4.4.4"
   },
   "resolutions": {
-    "pacote": "12.0.3"
+    "pacote": "13.6.2"
   },
   "resolutionsComments": {
     "pacote": "@lerna/command depends on pacote, which eventually depends on json-schema (CVE-2021-3918)"
