@@ -40,7 +40,7 @@ With extended table syntax, you can write table cell with colspan / rowspan usin
 | escape ^         | \^               |
 ```
 
-If set `colspanWithEmptyCell` option, you can use empty cell containing no spaces which merges with the left cell.
+If set `colspanWithEmpty` option, you can use empty cell containing no spaces which merges with the left cell.
 For the purpose of avoiding unintentional merges, the followings are not merged.
 
 * Cell containing whitespaces
