@@ -37,7 +37,7 @@
     "micromark-util-types": "^1.0.1"
   },
   "devDependencies": {
-    "@types/node": "16.11.47",
+    "@types/node": "16.11.62",
     "debug": "4.3.4",
     "micromark": "3.0.10",
     "micromark-build": "1.1.0",
