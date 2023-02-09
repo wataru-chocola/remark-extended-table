@@ -38,7 +38,7 @@
     "unist-util-position": "^4.0.1"
   },
   "devDependencies": {
-    "hast-util-to-html": "8.0.3",
+    "hast-util-to-html": "8.0.4",
     "mdast-util-gfm-table": "1.0.7",
     "unist-util-inspect": "7.0.1"
   },
