@@ -35,7 +35,7 @@ export const extendedTableToMarkdown = (options?: extendedTableToMarkdownOptions
         j += 1 + offsetCol;
       }
     }
-    return gfmTableToMarkdown(options).handlers!.table(node, parent, context, safeOptions);
+    return gfmTableToMarkdown(options).handlers!.table!(node, parent, context, safeOptions);
   };
 
   function expandColspan(table: Table, cell: TableCell, i: number, j: number): number {
@@ -72,8 +72,8 @@ export const extendedTableToMarkdown = (options?: extendedTableToMarkdownOptions
 
   return {
     unsafe: [
-      { character: '^', inConstruct: ['tableCell'] },
-      { character: '>', inConstruct: ['tableCell'] },
+      { character: '^', inConstruct: ['tableCell' as const] },
+      { character: '>', inConstruct: ['tableCell' as const] },
     ],
     handlers: {
       table: tableHandler,

@@ -5,5 +5,6 @@
   "bootstrap": {
     "npmClientArgs": ["--no-optional"]
   },
+  "useWorkspaces": true,
   "version": "independent"
 }

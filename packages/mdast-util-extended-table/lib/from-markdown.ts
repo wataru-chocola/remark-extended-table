@@ -59,7 +59,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
   }
 
   function exitCell(this: CompileContext, token: Token): void {
-    if (options?.colspanWithEmpty && this.sliceSerialize(token) === '|') {
+    if (options?.colspanWithEmpty && ['|', '||'].includes(this.sliceSerialize(token))) {
       // @ts-ignore
       this.enter<TableCellColspanWithLeftNode>(
         { type: mdastTypes.tableCellColspanWithLeft },
@@ -179,18 +179,6 @@ function marker2text(cell: TableCell): void {
       position: Object.assign({}, cell.children[0].position),
     };
     cell.children.splice(0, 1, textNode);
-  }
-}
-
-function processTableCell(
-  table: Table,
-  callback: (cell: TableCell, i: number, j: number) => void,
-): void {
-  for (let i = table.children.length - 1; i >= 0; i--) {
-    const row = table.children[i];
-    for (let j = row.children.length - 1; j >= 0; j--) {
-      callback(row.children[j], i, j);
-    }
   }
 }
 

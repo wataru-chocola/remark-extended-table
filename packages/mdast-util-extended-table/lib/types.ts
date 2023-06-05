@@ -35,3 +35,9 @@ export interface TableCellColspanWithLeftNode extends Node {
 export interface TableCellRowspanNode extends Node {
   type: 'tableCellRowspan';
 }
+
+declare module 'mdast-util-from-markdown' {
+  interface CompileData {
+    inTableCell?: boolean;
+  }
+}
