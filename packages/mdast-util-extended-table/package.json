@@ -50,7 +50,7 @@
     "format": "prettier --write \"./**/*.{ts,json}\"",
     "lint": "eslint ./**/*.{ts}",
     "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' --testPathIgnorePatterns=\"/node_modules/\"",
+    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' -e --testPathIgnorePatterns=\"/node_modules/\"",
     "build": "tsc --build --verbose",
     "rebuild": "npm run clean && npm run build",
     "prepublish": "npm run rebuild",

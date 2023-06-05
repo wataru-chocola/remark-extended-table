@@ -40,7 +40,7 @@ test('simple rowspan', () => {
                   },
                 ],
                 position: {
-                  end: { column: 6, line: 2, offset: 6 },
+                  end: { column: 5, line: 2, offset: 5 },
                   start: { column: 1, line: 2, offset: 1 },
                 },
               },
@@ -58,7 +58,7 @@ test('simple rowspan', () => {
                 ],
                 position: {
                   end: { column: 10, line: 2, offset: 10 },
-                  start: { column: 6, line: 2, offset: 6 },
+                  start: { column: 5, line: 2, offset: 5 },
                 },
               },
             ],
@@ -84,7 +84,7 @@ test('simple rowspan', () => {
                   },
                 ],
                 position: {
-                  end: { column: 6, line: 4, offset: 26 },
+                  end: { column: 5, line: 4, offset: 25 },
                   start: { column: 1, line: 4, offset: 21 },
                 },
               },
@@ -101,7 +101,7 @@ test('simple rowspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 6, line: 4, offset: 26 },
+                  start: { column: 5, line: 4, offset: 25 },
                   end: { column: 10, line: 4, offset: 30 },
                 },
               },
@@ -127,7 +127,7 @@ test('simple rowspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 6, line: 5, offset: 36 },
+                  start: { column: 5, line: 5, offset: 35 },
                   end: { column: 10, line: 5, offset: 40 },
                 },
               },
@@ -183,7 +183,7 @@ test('simple colspan', () => {
                   },
                 ],
                 position: {
-                  end: { column: 6, line: 2, offset: 6 },
+                  end: { column: 5, line: 2, offset: 5 },
                   start: { column: 1, line: 2, offset: 1 },
                 },
               },
@@ -200,16 +200,8 @@ test('simple colspan', () => {
                   },
                 ],
                 position: {
-                  end: {
-                    column: 10,
-                    line: 2,
-                    offset: 10,
-                  },
-                  start: {
-                    column: 6,
-                    line: 2,
-                    offset: 6,
-                  },
+                  end: { column: 10, line: 2, offset: 10 },
+                  start: { column: 5, line: 2, offset: 5 },
                 },
               },
             ],
@@ -234,7 +226,7 @@ test('simple colspan', () => {
                   },
                 ],
                 position: {
-                  end: { column: 6, line: 4, offset: 26 },
+                  end: { column: 5, line: 4, offset: 25 },
                   start: { column: 1, line: 4, offset: 21 },
                 },
               },
@@ -251,7 +243,7 @@ test('simple colspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 6, line: 4, offset: 26 },
+                  start: { column: 5, line: 4, offset: 25 },
                   end: { column: 10, line: 4, offset: 30 },
                 },
               },
@@ -278,7 +270,7 @@ test('simple colspan', () => {
                 ],
                 colspan: 2,
                 position: {
-                  start: { column: 6, line: 5, offset: 36 },
+                  start: { column: 5, line: 5, offset: 35 },
                   end: { column: 10, line: 5, offset: 40 },
                 },
               },
@@ -400,7 +392,7 @@ test('empty cell colspan', () => {
                   },
                 ],
                 position: {
-                  end: { column: 6, line: 2, offset: 6 },
+                  end: { column: 5, line: 2, offset: 5 },
                   start: { column: 1, line: 2, offset: 1 },
                 },
               },
@@ -418,7 +410,7 @@ test('empty cell colspan', () => {
                 ],
                 position: {
                   end: { column: 10, line: 2, offset: 10 },
-                  start: { column: 6, line: 2, offset: 6 },
+                  start: { column: 5, line: 2, offset: 5 },
                 },
               },
             ],
@@ -445,7 +437,7 @@ test('empty cell colspan', () => {
                 ],
                 position: {
                   start: { column: 1, line: 4, offset: 21 },
-                  end: { column: 9, line: 4, offset: 29 },
+                  end: { column: 8, line: 4, offset: 28 },
                 },
               },
             ],
@@ -471,14 +463,14 @@ test('empty cell colspan', () => {
                 ],
                 position: {
                   start: { column: 1, line: 5, offset: 31 },
-                  end: { column: 6, line: 5, offset: 36 },
+                  end: { column: 5, line: 5, offset: 35 },
                 },
               },
               {
                 type: 'tableCell',
                 children: [],
                 position: {
-                  start: { column: 6, line: 5, offset: 36 },
+                  start: { column: 5, line: 5, offset: 35 },
                   end: { column: 10, line: 5, offset: 40 },
                 },
               },
@@ -496,7 +488,7 @@ test('empty cell colspan', () => {
                 children: [],
                 position: {
                   start: { column: 1, line: 6, offset: 41 },
-                  end: { column: 3, line: 6, offset: 43 },
+                  end: { column: 2, line: 6, offset: 42 },
                 },
               },
               {
@@ -512,7 +504,7 @@ test('empty cell colspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 3, line: 6, offset: 43 },
+                  start: { column: 2, line: 6, offset: 42 },
                   end: { column: 10, line: 6, offset: 50 },
                 },
               },
@@ -569,7 +561,7 @@ test('not empty cell colspan', () => {
                 ],
                 position: {
                   start: { column: 2, line: 2, offset: 2 },
-                  end: { column: 5, line: 2, offset: 5 },
+                  end: { column: 4, line: 2, offset: 4 },
                 },
               },
               {
@@ -585,7 +577,7 @@ test('not empty cell colspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 5, line: 2, offset: 5 },
+                  start: { column: 4, line: 2, offset: 4 },
                   end: { column: 8, line: 2, offset: 8 },
                 },
               },
@@ -612,7 +604,7 @@ test('not empty cell colspan', () => {
                 ],
                 position: {
                   start: { column: 2, line: 4, offset: 18 },
-                  end: { column: 5, line: 4, offset: 21 },
+                  end: { column: 6, line: 4, offset: 22 },
                 },
               },
               {
@@ -646,7 +638,7 @@ test('not empty cell colspan', () => {
                 ],
                 position: {
                   start: { column: 2, line: 5, offset: 24 },
-                  end: { column: 5, line: 5, offset: 27 },
+                  end: { column: 4, line: 5, offset: 26 },
                 },
               },
               {
@@ -662,7 +654,7 @@ test('not empty cell colspan', () => {
                   },
                 ],
                 position: {
-                  start: { column: 5, line: 5, offset: 27 },
+                  start: { column: 4, line: 5, offset: 26 },
                   end: { column: 7, line: 5, offset: 29 },
                 },
               },
@@ -718,7 +710,7 @@ test('regression: more than 2 colspanWithRight is not working', () => {
                 ],
                 position: {
                   start: { column: 1, line: 2, offset: 1 },
-                  end: { column: 6, line: 2, offset: 6 },
+                  end: { column: 5, line: 2, offset: 5 },
                 },
               },
               {
@@ -734,8 +726,8 @@ test('regression: more than 2 colspanWithRight is not working', () => {
                   },
                 ],
                 position: {
-                  start: { column: 6, line: 2, offset: 6 },
-                  end: { column: 10, line: 2, offset: 10 },
+                  start: { column: 5, line: 2, offset: 5 },
+                  end: { column: 9, line: 2, offset: 9 },
                 },
               },
               {
@@ -752,7 +744,7 @@ test('regression: more than 2 colspanWithRight is not working', () => {
                 ],
                 position: {
                   end: { column: 14, line: 2, offset: 14 },
-                  start: { column: 10, line: 2, offset: 10 },
+                  start: { column: 9, line: 2, offset: 9 },
                 },
               },
             ],
@@ -778,7 +770,7 @@ test('regression: more than 2 colspanWithRight is not working', () => {
                 ],
                 colspan: 3,
                 position: {
-                  start: { column: 10, line: 4, offset: 38 },
+                  start: { column: 9, line: 4, offset: 37 },
                   end: { column: 14, line: 4, offset: 42 },
                 },
               },

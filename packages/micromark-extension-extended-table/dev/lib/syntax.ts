@@ -95,20 +95,20 @@ function tokenizeExtendedTableCell(
 
   function start(code: Code): State | void {
     debug('start: start' + String(code));
-    let tokenType: string;
     switch (code) {
       case codes.caret:
-        tokenType = tokenTypes.extendedTableCellRowspanMarker;
+        effects.enter(tokenTypes.extendedTableCellRowspanMarker);
+        effects.consume(code);
+        effects.exit(tokenTypes.extendedTableCellRowspanMarker);
         break;
       case codes.greaterThan:
-        tokenType = tokenTypes.extendedTableCellColspanMarker;
+        effects.enter(tokenTypes.extendedTableCellColspanMarker);
+        effects.consume(code);
+        effects.exit(tokenTypes.extendedTableCellColspanMarker);
         break;
       default:
         return nok(code);
     }
-    effects.enter(tokenType);
-    effects.consume(code);
-    effects.exit(tokenType);
     return ok;
   }
 }
