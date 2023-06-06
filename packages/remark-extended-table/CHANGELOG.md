@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@1.0.1...remark-extended-table@1.1.0) (2023-06-06)
+
+
+* feat: add sideEffects hint ([#85](https://github.com/wataru-chocola/remark-extended-table/issues/85)) ([55faa88](https://github.com/wataru-chocola/remark-extended-table/commit/55faa88df70c8b0f6e8fbae8a65cd3e51d299d54))
+* update: adjust code to micromark-extension-gfm-table v1.0.7 and micromark-util-types v1.1.0
+
+
+
 ## [1.0.1](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@1.0.0...remark-extended-table@1.0.1) (2022-07-22)
 
 

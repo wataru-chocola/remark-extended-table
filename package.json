@@ -22,7 +22,7 @@
     "build": "lerna bootstrap --hoist",
     "clean": "lerna clean -y",
 
-    "lerna:versionup": "lerna version --no-push --conventional-commits",
+    "lerna:versionup": "lerna version --no-push --no-git-tag-version --conventional-commits",
     "lerna:versionup:push": "git push && git push --tags",
     "lerna:publish": "lerna publish from-git"
   },
