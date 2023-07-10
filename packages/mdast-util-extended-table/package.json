@@ -28,20 +28,22 @@
     "markdown"
   ],
   "dependencies": {
-    "@types/hast": "^2.3.4",
-    "@types/mdast": "^3.0.10",
-    "@types/unist": "^2.0.6",
-    "mdast-util-from-markdown": "^1.0.0",
-    "mdast-util-to-hast": "^12.0.0",
-    "mdast-util-to-markdown": "^1.2.1",
+    "@types/hast": "^3.0.0",
+    "@types/mdast": "^4.0.0",
+    "@types/unist": "^3.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-to-hast": "^12.3.0",
+    "mdast-util-to-markdown": "^2.0.0",
     "micromark-extension-extended-table": "^1.1.0",
-    "unist-builder": "^3.0.0",
-    "unist-util-position": "^4.0.1"
+    "unist-builder": "^4.0.0",
+    "unist-util-position": "^5.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "hast-util-to-html": "8.0.4",
     "mdast-util-gfm-table": "1.0.7",
-    "unist-util-inspect": "7.0.2"
+    "micromark-extension-gfm-table": "2.0.0",
+    "unist-util-inspect": "8.0.0"
   },
   "peerDependencies": {
     "mdast-util-gfm-table": "^1.0.1"
@@ -50,7 +52,7 @@
     "format": "prettier --write \"./**/*.{ts,json}\"",
     "lint": "eslint ./**/*.{ts}",
     "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "pnpm run build && NODE_OPTIONS=--experimental-vm-modules jest 'test\\.js' -e --testPathIgnorePatterns=\"/node_modules/\"",
+    "test": "vitest",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",

@@ -33,12 +33,12 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
   };
 
   function enterCell(this: CompileContext, token: Token): void {
-    this.enter<TableCell>({ type: 'tableCell', children: [] }, token);
-    this.setData('inTableCell', true);
+    this.enter({ type: 'tableCell', children: [] }, token);
+    this.data.inTableCell = true;
   }
 
   function enterColspanMarker(this: CompileContext, token: Token): void {
-    if (this.getData('inTableCell')) {
+    if (this.data.inTableCell) {
       // @ts-ignore
       this.enter<TableCellColspanWithRightNode>(
         { type: mdastTypes.tableCellColspanWithRight },
@@ -50,7 +50,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
   }
 
   function enterRowspanMarker(this: CompileContext, token: Token): void {
-    if (this.getData('inTableCell')) {
+    if (this.data.inTableCell) {
       // @ts-ignore
       this.enter<TableCellRowspanNode>({ type: mdastTypes.tableCellRowspan }, token);
     } else {
@@ -68,7 +68,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
       this.exit(token);
     }
     this.exit(token);
-    this.setData('inTableCell');
+    this.data.inTableCell = undefined;
   }
 
   function exit(this: CompileContext, token: Token): void {

@@ -1,3 +1,5 @@
+import { test, expect } from 'vitest';
+
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { extendedTableFromMarkdown, extendedTableFromMarkdownOptions } from './from-markdown.js';
 import { extendedTable } from 'micromark-extension-extended-table';
@@ -6,7 +8,7 @@ import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';
 
 const compile = (md: string, options?: extendedTableFromMarkdownOptions) =>
   fromMarkdown(md, {
-    extensions: [gfmTable, extendedTable],
+    extensions: [gfmTable(), extendedTable],
     mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown(options)],
   });
 

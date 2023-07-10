@@ -41,3 +41,9 @@ declare module 'mdast-util-from-markdown' {
     inTableCell?: boolean;
   }
 }
+
+declare module 'mdast-util-to-markdown' {
+  interface ConstructNameMap {
+    tableCell: 'tableCell';
+  }
+}

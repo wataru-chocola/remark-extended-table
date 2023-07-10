@@ -1,3 +1,5 @@
+import { test, expect } from 'vitest';
+
 import { extendedTableToMarkdown } from './to-markdown.js';
 import { gfmTableToMarkdown } from 'mdast-util-gfm-table';
 import { toMarkdown } from 'mdast-util-to-markdown';
