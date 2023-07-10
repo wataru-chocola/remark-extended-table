@@ -56,11 +56,11 @@
     "format": "prettier --write \"./dev/**/*.{js,ts,json}\"",
     "lint": "eslint ./dev/**/*.{ts}",
     "lint-fix": "eslint --fix ./dev/**/*.{ts} && prettier --write ./dev/**/*.{ts}",
-    "test": "npm run build && NODE_OPTIONS=--experimental-vm-modules jest --testPathIgnorePatterns=\"/node_modules/|/dev/\"",
+    "test": "pnpm run build && NODE_OPTIONS=--experimental-vm-modules jest --testPathIgnorePatterns=\"/node_modules/|/dev/\"",
     "test-dev": "tsc --build --verbose && NODE_OPTIONS=\"--experimental-vm-modules -C development\" jest \"dev/.*\\.test\\.js\"",
     "build": "tsc --build --verbose && micromark-build",
-    "rebuild": "npm run clean && npm run build",
-    "prepublish": "npm run rebuild",
-    "clean": "rimraf lib/ dev/*{.js,.d.ts} dev/**/*{.js,.d.ts} index*{.js,.d.ts}"
+    "rebuild": "pnpm run clean && pnpm run build",
+    "prepublish": "pnpm run rebuild",
+    "clean": "rimraf lib/ dev/*{.js,.d.ts} dev/**/*{.js,.d.ts} index*{.js,.d.ts} tsconfig.tsbuildinfo"
   }
 }
