@@ -20,11 +20,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: corepack enable pnpm
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm install --no-save --no-package-lock -g lerna npm@latest
-      - run: lerna bootstrap --hoist --ci
-      - run: lerna run test --stream
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run test

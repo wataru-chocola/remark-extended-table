@@ -1,10 +1,5 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "bootstrap": {
-    "npmClientArgs": ["--no-optional"]
-  },
-  "useWorkspaces": true,
-  "version": "independent"
+  "version": "independent",
+  "npmClient": "pnpm",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
