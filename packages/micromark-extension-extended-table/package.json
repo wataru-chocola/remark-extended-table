@@ -40,12 +40,12 @@
   "devDependencies": {
     "@types/node": "16.18.14",
     "debug": "4.3.4",
-    "micromark": "3.0.10",
+    "micromark": "4.0.0",
     "micromark-build": "1.1.0",
     "micromark-extension-gfm-table": "1.0.7"
   },
   "peerDependencies": {
-    "micromark": "^3.0.5",
+    "micromark": "^3.0.5 || ^4.0.0",
     "micromark-extension-gfm-table": "^1.0.3"
   },
   "keywords": [
