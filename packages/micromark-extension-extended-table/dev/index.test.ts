@@ -1,3 +1,5 @@
+import { test, expect } from 'vitest';
+
 import { extendedTable, extendedTableHtml } from './index.js';
 import { micromark } from 'micromark';
 import { gfmTable, gfmTableHtml } from 'micromark-extension-gfm-table';
@@ -6,24 +8,24 @@ import { CompileContext } from 'micromark-util-types';
 
 const parse = (md: string) =>
   micromark(md, {
-    extensions: [gfmTable, extendedTable],
-    htmlExtensions: [gfmTableHtml, extendedTableHtml],
+    extensions: [gfmTable(), extendedTable],
+    htmlExtensions: [gfmTableHtml(), extendedTableHtml],
   });
 
 const parseWithDevHtml = (md: string) => {
   const devHtml = {
     enter: {
-      [tokenTypes.extendedTableCellColspanMarker](this: CompileContext): void {
+      [tokenTypes.extendedTableCellColspanMarker](this: CompileContext): undefined {
         this.raw(this.encode('*COLSPAN*'));
       },
-      [tokenTypes.extendedTableCellRowspanMarker](this: CompileContext): void {
+      [tokenTypes.extendedTableCellRowspanMarker](this: CompileContext): undefined {
         this.raw(this.encode('*ROWSPAN*'));
       },
     },
   };
   return micromark(md, {
-    extensions: [gfmTable, extendedTable],
-    htmlExtensions: [gfmTableHtml, devHtml],
+    extensions: [gfmTable(), extendedTable],
+    htmlExtensions: [gfmTableHtml(), devHtml],
   });
 };
 

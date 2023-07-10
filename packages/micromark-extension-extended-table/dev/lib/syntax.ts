@@ -8,8 +8,7 @@ import {
   TokenizeContext,
 } from 'micromark-util-types';
 import { splice } from 'micromark-util-chunked';
-import { codes } from 'micromark-util-symbol/codes';
-import { types } from 'micromark-util-symbol/types';
+import { codes, types } from 'micromark-util-symbol';
 import { tokenTypes } from './types.js';
 import assert from 'assert';
 import Debug from 'debug';
@@ -93,7 +92,7 @@ function tokenizeExtendedTableCell(
 
   return start;
 
-  function start(code: Code): State | void {
+  function start(code: Code): State | undefined {
     debug('start: start' + String(code));
     switch (code) {
       case codes.caret:

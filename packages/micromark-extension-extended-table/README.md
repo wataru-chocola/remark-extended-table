@@ -33,8 +33,8 @@ const md = `
 `;
 
 const result = micromark(md, {
-  extensions: [gfmTable, extendedTable],
-  htmlExtensions: [gfmTableHtml, extendedTableHtml],
+  extensions: [gfmTable(), extendedTable],
+  htmlExtensions: [gfmTableHtml(), extendedTableHtml],
 });
 ```
 
@@ -43,7 +43,7 @@ const result = micromark(md, {
 For development purpose, you can run tests with debug messages.
 
 ```console
-$ DEBUG="micromark-extension-extended-table:syntax" npm run test-dev
+$ DEBUG="micromark-extension-extended-table:syntax" pnpm run test
 ```
 
 [micromark]: https://github.com/micromark/micromark
