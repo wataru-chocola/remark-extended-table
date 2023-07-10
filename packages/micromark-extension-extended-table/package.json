@@ -42,11 +42,11 @@
     "debug": "4.3.4",
     "micromark": "3.0.10",
     "micromark-build": "1.1.0",
-    "micromark-extension-gfm-table": "1.0.7"
+    "micromark-extension-gfm-table": "2.0.0"
   },
   "peerDependencies": {
     "micromark": "^3.0.5",
-    "micromark-extension-gfm-table": "^1.0.3"
+    "micromark-extension-gfm-table": "^1.0.3 || ^2.0.0"
   },
   "keywords": [
     "micromark",
