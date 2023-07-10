@@ -1,3 +1,5 @@
+import { test, expect } from 'vitest';
+
 import { toHast } from 'mdast-util-to-hast';
 import { extendedTableHandlers } from './mdast-to-hast';
 
