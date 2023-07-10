@@ -28,7 +28,7 @@
     "markdown"
   ],
   "dependencies": {
-    "@types/hast": "^2.3.4",
+    "@types/hast": "^3.0.0",
     "@types/mdast": "^3.0.10",
     "@types/unist": "^2.0.6",
     "mdast-util-from-markdown": "^1.0.0",
