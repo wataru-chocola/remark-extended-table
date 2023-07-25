@@ -1,7 +1,6 @@
 {
-  "include": [
-    "./lib/*.ts"
-  ],
+  "include": ["./lib/*.ts"],
+  "exclude": ["./lib/*.test.ts"],
   "compilerOptions": {
     "target": "es2018",
     "strict": true,
@@ -9,10 +8,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "composite": true
   },
-  "references": [
-    {"path": "../micromark-extension-extended-table"}
-  ]
+  "references": [{ "path": "../micromark-extension-extended-table" }]
 }

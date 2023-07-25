@@ -1,3 +1,5 @@
+import { test, expect } from 'vitest';
+
 import { remarkExtendedTable, extendedTableHandlers, Options } from './index.js';
 
 import { unified } from 'unified';

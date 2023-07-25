@@ -50,9 +50,9 @@
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
-    "lint": "eslint ./**/*.{ts}",
-    "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "vitest",
+    "lint": "eslint ./**/*.ts",
+    "lint-fix": "eslint --fix ./**/*.ts && prettier --write ./**/*.{ts,json}",
+    "test": "vitest run --passWithNoTests",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",

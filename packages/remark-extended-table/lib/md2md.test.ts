@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import { remarkExtendedTable } from './index.js';
 
 import { unified } from 'unified';
