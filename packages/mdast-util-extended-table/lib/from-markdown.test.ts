@@ -9,7 +9,7 @@ import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';
 const compile = (md: string, options?: extendedTableFromMarkdownOptions) =>
   fromMarkdown(md, {
     extensions: [gfmTable(), extendedTable],
-    mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown(options)],
+    mdastExtensions: [gfmTableFromMarkdown(), extendedTableFromMarkdown(options)],
   });
 
 test('simple rowspan', () => {
