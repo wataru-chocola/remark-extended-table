@@ -37,12 +37,12 @@
     "remark-parse": "10.0.2",
     "remark-rehype": "10.1.0",
     "remark-stringify": "10.0.3",
-    "unified": "10.1.2"
+    "unified": "11.0.3"
   },
   "peerDependencies": {
     "remark-gfm": "^3.0.0",
     "remark-parse": "^10.0.0",
-    "unified": "^10.1.0"
+    "unified": "^10.1.0 || ^11.0.0"
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
