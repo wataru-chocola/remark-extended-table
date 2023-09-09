@@ -76,7 +76,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
   }
 
   function processSpanMarkers(table: Table) {
-    const toBeDeleted: Array<[number, number]> = [];
+    const toBeDeleted: [number, number][] = [];
     for (let i = table.children.length - 1; i >= 0; i--) {
       const row = table.children[i];
       for (let j = row.children.length - 1; j >= 0; j--) {
@@ -90,13 +90,13 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
               break;
             }
             for (let k = 1; j + k < row.children.length; k++) {
-              row.children[j + k].colspan = (row.children[j + k].colspan || 1) + 1;
+              row.children[j + k].colspan = (row.children[j + k].colspan ?? 1) + 1;
               if (!isCellColspanWithRight(row.children[j + k])) break;
             }
             toBeDeleted.push([i, j]);
             break;
 
-          case mdastTypes.tableCellRowspan:
+          case mdastTypes.tableCellRowspan: {
             if (i <= 1) {
               marker2text(cell);
               break;
@@ -104,9 +104,10 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
 
             const prev_row = table.children[i - 1];
             prev_row.children[j].rowspan =
-              (prev_row.children[j].rowspan || 1) + (cell.rowspan || 1);
+              (prev_row.children[j].rowspan ?? 1) + (cell.rowspan ?? 1);
             toBeDeleted.push([i, j]);
             break;
+          }
 
           case mdastTypes.tableCellColspanWithLeft:
             if (j < 1 || isCellColspanWithRight(row.children[j - 1])) {
@@ -114,14 +115,14 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
               marker2text(cell);
               break;
             }
-            row.children[j - 1].colspan = (row.children[j - 1].colspan || 1) + (cell.colspan || 1);
+            row.children[j - 1].colspan = (row.children[j - 1].colspan ?? 1) + (cell.colspan ?? 1);
             toBeDeleted.push([i, j]);
             break;
         }
       }
     }
 
-    for (let point of toBeDeleted) {
+    for (const point of toBeDeleted) {
       const [i, j] = point;
       table.children[i].children.splice(j, 1);
     }
@@ -131,7 +132,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
     visit(tree, 'table', (node: Table) => {
       // create empty cell node
       if (node.align) {
-        for (let row of node.children) {
+        for (const row of node.children) {
           for (let i = 0; i < node.align.length - row.children.length; i++) {
             row.children.push(makeCell());
           }
@@ -182,7 +183,7 @@ function marker2text(cell: TableCell): void {
   }
 }
 
-function isCellColspanWithRight(cell: TableCell): Boolean {
+function isCellColspanWithRight(cell: TableCell): boolean {
   if (cell.children.length !== 1) {
     return false;
   }
