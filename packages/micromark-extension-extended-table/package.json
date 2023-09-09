@@ -34,7 +34,7 @@
     "micromark-util-types": "^2.0.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.8",
+    "@types/debug": "4.1.8",
     "debug": "4.3.4",
     "micromark": "4.0.0",
     "micromark-build": "2.0.2",
