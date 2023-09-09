@@ -32,8 +32,8 @@
     "@types/mdast": "^4.0.0",
     "@types/unist": "^3.0.0",
     "mdast-util-from-markdown": "^2.0.0",
-    "mdast-util-to-hast": "^12.3.0",
-    "mdast-util-to-markdown": "^2.0.0",
+    "mdast-util-to-hast": "^13.0.0",
+    "mdast-util-to-markdown": "^2.1.0",
     "micromark-extension-extended-table": "^1.1.0",
     "unist-builder": "^4.0.0",
     "unist-util-position": "^5.0.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "hast-util-to-html": "8.0.4",
-    "mdast-util-gfm-table": "1.0.7",
+    "mdast-util-gfm-table": "2.0.0",
     "micromark-extension-gfm-table": "2.0.0",
     "unist-util-inspect": "8.0.0"
   },
@@ -50,9 +50,9 @@
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
-    "lint": "eslint ./**/*.{ts}",
-    "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "vitest",
+    "lint": "eslint ./**/*.ts",
+    "lint-fix": "eslint --fix ./**/*.ts && prettier --write ./**/*.{ts,json}",
+    "test": "vitest run --passWithNoTests",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",

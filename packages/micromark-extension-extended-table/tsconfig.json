@@ -1,5 +1,6 @@
 {
   "include": ["./dev/**/*.ts"],
+  "exclude": ["./dev/**/*.test.ts"],
   "compilerOptions": {
     "target": "es2018",
     "strict": true,

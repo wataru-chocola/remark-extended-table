@@ -51,9 +51,9 @@
   ],
   "scripts": {
     "format": "prettier --write \"./dev/**/*.{js,ts,json}\"",
-    "lint": "eslint ./dev/**/*.{ts}",
-    "lint-fix": "eslint --fix ./dev/**/*.{ts} && prettier --write ./dev/**/*.{ts}",
-    "test": "vitest",
+    "lint": "eslint ./dev/**/*.ts",
+    "lint-fix": "eslint --fix ./dev/**/*.ts && prettier --write ./dev/**/*.{ts}",
+    "test": "vitest run --passWithNoTests",
     "build": "tsc --build --verbose && micromark-build",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",

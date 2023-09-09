@@ -28,8 +28,8 @@
     "markdown"
   ],
   "dependencies": {
-    "mdast-util-extended-table": "^1.1.0",
-    "micromark-extension-extended-table": "^1.1.0"
+    "mdast-util-extended-table": "workspace:^",
+    "micromark-extension-extended-table": "workspace:^"
   },
   "devDependencies": {
     "rehype-stringify": "9.0.3",
@@ -46,9 +46,9 @@
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
-    "lint": "eslint ./**/*.{ts}",
-    "lint-fix": "eslint --fix ./**/*.{ts} && prettier --write ./**/*.{ts,json}",
-    "test": "vitest",
+    "lint": "eslint ./**/*.ts",
+    "lint-fix": "eslint --fix ./**/*.ts && prettier --write ./**/*.{ts,json}",
+    "test": "vitest run --passWithNoTests",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",
