@@ -12,11 +12,11 @@ export const mdastTypes = {
 };
 
 export type Table = Omit<MdastTable, 'children'> & {
-  children: Array<TableRow>;
+  children: TableRow[];
 };
 
 export type TableRow = Omit<MdastTableRow, 'children'> & {
-  children: Array<TableCell>;
+  children: TableCell[];
 };
 
 export type TableCell = MdastTableCell & {

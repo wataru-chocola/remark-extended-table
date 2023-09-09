@@ -78,7 +78,7 @@ export const extendedTableHandler: Handler = (state, node: Table) => {
   return hTable;
 };
 
-function wrap(nodes: Array<Content>): Array<Content> {
+function wrap(nodes: Content[]): Content[] {
   const result = [];
 
   result.push(u('text', '\n'));
