@@ -46,7 +46,7 @@
     "unist-util-inspect": "8.0.0"
   },
   "peerDependencies": {
-    "mdast-util-gfm-table": "^1.0.1"
+    "mdast-util-gfm-table": "^1.0.1 || ^2.0.0"
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
