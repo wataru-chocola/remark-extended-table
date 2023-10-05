@@ -12,8 +12,8 @@ const process = (md: string, options?: Options, gfmOptions?: gfmOptions) =>
   unified()
     .use(remarkParse)
     .use(remarkGfm, gfmOptions)
-    .use(remarkExtendedTable, options)
-    .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
+    .use(remarkExtendedTable, { ...options, ...gfmOptions })
+    .use(remarkRehype, { handlers: extendedTableHandlers })
     .use(rehypeStringify)
     .process(md);
 
