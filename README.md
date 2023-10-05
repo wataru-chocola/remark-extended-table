@@ -20,7 +20,7 @@
 ## Warning
 
 This package overrides `remarkGfm` behaviors.
-If you encounter any problems, disable this first and see what happens.
+If you encounter any problems, disable this first and see what will happen.
 
 
 ## Extended Table Syntax
@@ -84,7 +84,12 @@ const process = (md: string) =>
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
-    .use(remarkRehype, null, { handlers: Object.assign({}, extendedTableHandlers) })
+    .use(remarkRehype, {
+      handlers: {
+        // any other handlers
+        ...extendedTableHandlers,
+      }
+    })
     .use(rehypeStringify)
     .process(md);
 ```
@@ -102,10 +107,37 @@ This repository contains the following packages.
 ### `unified().use(remarkExtendedTable[, options])`
 
 Configures remark to parse extended table syntax.
+
 **This MUST be applied after `remarkGfm`**.
 
-
 #### `options`
+
+##### `tablePipeAlign` (`boolean?`, default: `true`)
+
+Passed to [mdast-util-gfm-table][] (used in `remarkGfm`) as `tablePipeAlign` option.
+
+**MUST be set to the same value as `remarkGfm`**.
+
+```typescript
+const result = await unified()
+  .use(remarkParse)
+  .use(remarkGfm, { tablePipeAlign: false })
+  .use(remarkExtendedTable, { tablePipeAlign: false })
+  .use(remarkStringify)
+  .process(md);
+``` 
+
+##### `tableCellPadding` (`boolean?`, default: `true`)
+
+Passed to [mdast-util-gfm-table][] (used in `remarkGfm`) as `tableCellPadding` option.
+
+**MUST be set to the same value as `remarkGfm`**.
+
+##### `stringLength` (`((value: string) => number)?`, default: `s => s.length`)
+
+Passed to [mdast-util-gfm-table][] (used in `remarkGfm`) as `stringLength` option.
+
+**MUST be set to the same value as `remarkGfm`**.
 
 ##### `extendedTableFromMarkdownOptions.colspanWithEmpty` (`boolean?`, default: `false`)
 
@@ -123,3 +155,4 @@ Whether to merge cell with the right empty cell which contains no spaces (`||`).
 [mdast-util-from-markdown]: https://github.com/syntax-tree/mdast-util-from-markdown
 [mdast-util-to-markdown]: https://github.com/syntax-tree/mdast-util-to-markdown
 [mdast-util-to-hast]: https://github.com/syntax-tree/mdast-util-to-hast
+[mdast-util-gfm-table]: https://github.com/syntax-tree/mdast-util-gfm-table#options

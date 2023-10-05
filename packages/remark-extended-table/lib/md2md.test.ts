@@ -6,7 +6,7 @@ import remarkParse from 'remark-parse';
 import remarkStringify from 'remark-stringify';
 import remarkGfm from 'remark-gfm';
 
-test('toMarkdown', () => {
+test('toMarkdown', async () => {
   const md = `
 | a | bcd |
 | - | - |
@@ -16,16 +16,16 @@ test('toMarkdown', () => {
 | - | --- |
 | > | 2   |
 `;
-  const promise = unified()
+  const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkExtendedTable)
     .use(remarkStringify)
     .process(md);
-  promise.then((result) => expect(result.value).toBe(expected));
+  expect(result.value).toBe(expected);
 });
 
-test('passing gfmOptions', () => {
+test('passing gfmOptions', async () => {
   const md = `
 | a | bcd |
 | - | - |
@@ -35,11 +35,11 @@ test('passing gfmOptions', () => {
 | - | - |
 | > | 2 |
 `;
-  const promise = unified()
+  const result = await unified()
     .use(remarkParse)
     .use(remarkGfm, { tablePipeAlign: false })
-    .use(remarkExtendedTable)
+    .use(remarkExtendedTable, { tablePipeAlign: false })
     .use(remarkStringify)
     .process(md);
-  promise.then((result) => expect(result.value).toBe(expected));
+  expect(result.value).toBe(expected);
 });

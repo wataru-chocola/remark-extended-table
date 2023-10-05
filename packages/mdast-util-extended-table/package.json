@@ -28,25 +28,25 @@
     "markdown"
   ],
   "dependencies": {
-    "@types/hast": "^3.0.0",
-    "@types/mdast": "^4.0.0",
+    "@types/hast": "^3.0.1",
+    "@types/mdast": "^4.0.1",
     "@types/unist": "^3.0.0",
     "mdast-util-from-markdown": "^2.0.0",
-    "mdast-util-to-hast": "^13.0.0",
+    "mdast-util-to-hast": "^13.0.2",
     "mdast-util-to-markdown": "^2.1.0",
-    "micromark-extension-extended-table": "^1.1.0",
+    "micromark-extension-extended-table": "workspace:^",
     "unist-builder": "^4.0.0",
     "unist-util-position": "^5.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "hast-util-to-html": "8.0.4",
+    "hast-util-to-html": "9.0.0",
     "mdast-util-gfm-table": "2.0.0",
     "micromark-extension-gfm-table": "2.0.0",
     "unist-util-inspect": "8.0.0"
   },
   "peerDependencies": {
-    "mdast-util-gfm-table": "^1.0.1"
+    "mdast-util-gfm-table": "^2.0.0"
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
