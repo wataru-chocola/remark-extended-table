@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@1.1.0...remark-extended-table@2.0.0) (2023-10-09)
+
+* deps: support unified v11 / remark v11 / micromark v4
+
+### BREAKING CHANGES
+
+This does not peek into remarkGfm options anymore.
+You now have to pass the same options as remarkGfm to this plugin.
+
+```diff
+ const md2md = (md: string) => unified()
+   .use(remarkParse)
+   .use(remarkGfm, { tablePipeAlign: false })
+-  .use(remarkExtendedTable)
++  .use(remarkExtendedTable, { tablePipeAlign: false })
+   .use(remarkStringify)
+   .process(md);
+```
+
+
 # [1.1.0](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@1.0.1...remark-extended-table@1.1.0) (2023-06-06)
 
 
