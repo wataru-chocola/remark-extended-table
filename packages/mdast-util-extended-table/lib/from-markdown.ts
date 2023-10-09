@@ -1,13 +1,7 @@
 import type { CompileContext, Token } from 'mdast-util-from-markdown';
 import type { Root, Text } from 'mdast';
 import { mdastTypes } from './types.js';
-import type {
-  Table,
-  TableCell,
-  TableCellColspanWithRightNode,
-  TableCellColspanWithLeftNode,
-  TableCellRowspanNode,
-} from './types.js';
+import type { Table, TableCell } from './types.js';
 import { types } from 'micromark-extension-extended-table';
 import { visit } from 'unist-util-visit';
 
@@ -39,11 +33,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
 
   function enterColspanMarker(this: CompileContext, token: Token): void {
     if (this.data.inTableCell) {
-      // @ts-ignore
-      this.enter<TableCellColspanWithRightNode>(
-        { type: mdastTypes.tableCellColspanWithRight },
-        token,
-      );
+      this.enter({ type: mdastTypes.tableCellColspanWithRight }, token);
     } else {
       this.enter({ type: 'text', value: '>' }, token);
     }
@@ -51,8 +41,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
 
   function enterRowspanMarker(this: CompileContext, token: Token): void {
     if (this.data.inTableCell) {
-      // @ts-ignore
-      this.enter<TableCellRowspanNode>({ type: mdastTypes.tableCellRowspan }, token);
+      this.enter({ type: mdastTypes.tableCellRowspan }, token);
     } else {
       this.enter({ type: 'text', value: '^' }, token);
     }
@@ -60,11 +49,7 @@ export const extendedTableFromMarkdown = (options?: extendedTableFromMarkdownOpt
 
   function exitCell(this: CompileContext, token: Token): void {
     if (options?.colspanWithEmpty && ['|', '||'].includes(this.sliceSerialize(token))) {
-      // @ts-ignore
-      this.enter<TableCellColspanWithLeftNode>(
-        { type: mdastTypes.tableCellColspanWithLeft },
-        token,
-      );
+      this.enter({ type: mdastTypes.tableCellColspanWithLeft }, token);
       this.exit(token);
     }
     this.exit(token);
@@ -177,7 +162,7 @@ function marker2text(cell: TableCell): void {
     const textNode: Text = {
       type: 'text',
       value: text,
-      position: Object.assign({}, cell.children[0].position),
+      position: cell.children[0].position != null ? { ...cell.children[0].position } : undefined,
     };
     cell.children.splice(0, 1, textNode);
   }
@@ -188,6 +173,5 @@ function isCellColspanWithRight(cell: TableCell): boolean {
     return false;
   }
   const cellContent = cell.children[0];
-  // @ts-ignore
   return cellContent.type === mdastTypes.tableCellColspanWithRight;
 }

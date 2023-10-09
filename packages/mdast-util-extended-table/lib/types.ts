@@ -6,9 +6,9 @@ import type {
 import type { Node } from 'unist';
 
 export const mdastTypes = {
-  tableCellColspanWithRight: 'tableCellColspanWithRight',
-  tableCellColspanWithLeft: 'tableCellColspanWithLeft',
-  tableCellRowspan: 'tableCellRowspan',
+  tableCellColspanWithRight: 'tableCellColspanWithRight' as const,
+  tableCellColspanWithLeft: 'tableCellColspanWithLeft' as const,
+  tableCellRowspan: 'tableCellRowspan' as const,
 };
 
 export type Table = Omit<MdastTable, 'children'> & {
@@ -34,6 +34,20 @@ export interface TableCellColspanWithLeftNode extends Node {
 
 export interface TableCellRowspanNode extends Node {
   type: 'tableCellRowspan';
+}
+
+declare module 'mdast' {
+  interface RootContentMap {
+    tableCellColspanWithLeft: TableCellColspanWithLeftNode;
+    tableCellColspanWithRight: TableCellColspanWithRightNode;
+    tableCellRowspan: TableCellRowspanNode;
+  }
+
+  interface PhrasingContentMap {
+    tableCellColspanWithLeft: TableCellColspanWithLeftNode;
+    tableCellColspanWithRight: TableCellColspanWithRightNode;
+    tableCellRowspan: TableCellRowspanNode;
+  }
 }
 
 declare module 'mdast-util-from-markdown' {

@@ -16,8 +16,8 @@
   "keywords": [],
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
-    "lint": "eslint ./**/*.ts",
-    "lint-fix": "eslint --fix ./**/*.ts && prettier --write ./**/*.{ts,json}",
+    "lint": "eslint './**/*.ts'",
+    "lint-fix": "eslint --fix './**/*.ts' && prettier --write ./**/*.{ts,json}",
     "test": "lerna run test",
     "build": "lerna run build",
     "clean": "lerna run clean",
