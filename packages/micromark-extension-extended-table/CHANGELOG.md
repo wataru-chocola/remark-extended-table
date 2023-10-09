@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/wataru-chocola/remark-extended-table/compare/micromark-extension-extended-table@1.1.0...micromark-extension-extended-table@2.0.0) (2023-10-09)
+
+* chore!: support micromark v4
+
+
 # [1.1.0](https://github.com/wataru-chocola/remark-extended-table/compare/micromark-extension-extended-table@1.0.1...micromark-extension-extended-table@1.1.0) (2023-06-06)
 
 * feat: add sideEffects hint ([#85](https://github.com/wataru-chocola/remark-extended-table/issues/85)) ([55faa88](https://github.com/wataru-chocola/remark-extended-table/commit/55faa88df70c8b0f6e8fbae8a65cd3e51d299d54))
