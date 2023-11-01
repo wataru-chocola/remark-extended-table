@@ -34,7 +34,7 @@
     "micromark-util-types": "^2.0.0"
   },
   "devDependencies": {
-    "@types/assert": "^1.5.7",
+    "@types/assert": "1.5.7",
     "@types/debug": "4.1.9",
     "debug": "4.3.4",
     "micromark": "4.0.0",
