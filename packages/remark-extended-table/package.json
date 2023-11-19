@@ -42,7 +42,7 @@
   "peerDependencies": {
     "remark-gfm": "^4.0.0",
     "remark-parse": "^11.0.0",
-    "unified": "^11.1.0"
+    "unified": "^11.0.0"
   },
   "scripts": {
     "format": "prettier --write \"./**/*.{ts,json}\"",
