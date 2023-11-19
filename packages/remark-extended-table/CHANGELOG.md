@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@2.0.0...remark-extended-table@2.0.1) (2023-11-19)
+
+
+### Bug Fixes
+
+* **remark-extended-table:** broken peer dependency ([#131](https://github.com/wataru-chocola/remark-extended-table/issues/131)) ([37e0901](https://github.com/wataru-chocola/remark-extended-table/commit/37e09012f810b1f0b6758fe98eedba8f9bc05016))
+
+
+
+
+
 # [2.0.0](https://github.com/wataru-chocola/remark-extended-table/compare/remark-extended-table@1.1.0...remark-extended-table@2.0.0) (2023-10-09)
 
 * deps: support unified v11 / remark v11 / micromark v4
