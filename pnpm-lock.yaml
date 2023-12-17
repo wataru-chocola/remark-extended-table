@@ -104,8 +104,8 @@ importers:
         version: 2.0.0
     devDependencies:
       '@types/assert':
-        specifier: 1.5.7
-        version: 1.5.7
+        specifier: 1.5.10
+        version: 1.5.10
       '@types/debug':
         specifier: 4.1.12
         version: 4.1.12
@@ -1189,8 +1189,8 @@ packages:
       minimatch: 9.0.3
     dev: true
 
-  /@types/assert@1.5.7:
-    resolution: {integrity: sha512-qRK5tg1LaErm1uQBTu3YrVscZwPAbhGdXWtPG8YiiwUXQ68eKouiantdQmQCQ/cVXGZc/uBdH2TTbWwdpkOB0g==}
+  /@types/assert@1.5.10:
+    resolution: {integrity: sha512-qEO+AUgYab7GVbeDDgUNCU3o0aZUoIMpNAe+w5LDbRxfxQX7vQAdDgwj1AroX+i8KaV56FWg0srXlSZROnsrIQ==}
     dev: true
 
   /@types/babel__core@7.20.1:
