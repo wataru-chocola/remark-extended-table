@@ -51,8 +51,8 @@ const md = `
 `;
 
 const mdast = fromMarkdown(md, {
-  extensions: [gfmTable, extendedTable],
-  mdastExtensions: [gfmTableFromMarkdown, extendedTableFromMarkdown()],
+  extensions: [gfmTable(), extendedTable],
+  mdastExtensions: [gfmTableFromMarkdown(), extendedTableFromMarkdown()],
 });
 console.log(inspect(mdast));
 
