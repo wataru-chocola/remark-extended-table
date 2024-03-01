@@ -32,7 +32,7 @@
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.28.1",
     "lerna": "7.3.0",
-    "npm-check-updates": "16.14.14",
+    "npm-check-updates": "16.14.15",
     "prettier": "3.0.3",
     "rimraf": "5.0.5",
     "typescript": "5.2.2",
