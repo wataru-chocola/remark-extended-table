@@ -3,25 +3,40 @@ import { u } from 'unist-builder';
 import { pointStart, pointEnd } from 'unist-util-position';
 import type { Element, ElementContent as Content } from 'hast';
 
-import type { Table, TableRow } from './types.js';
+import type { Table, TableRow, TableCell } from './types.js';
 import { AlignType } from 'mdast';
 
 const mdastTableRowsToHast = (state: State, rows: TableRow[], align: AlignType[]) => {
   const hRows = [];
+  const tmpTable: (TableCell | null)[][] = rows.map((row) => [...row.children]);
 
   for (let i = 0; i < rows.length; i++) {
-    const cells = rows[i].children;
+    const cells = tmpTable[i];
     const tag = i === 0 ? 'th' : 'td';
     const out = [] as Element[];
+    let colOffset = 0;
 
     for (let j = 0; j < cells.length; j++) {
       const cell = cells[j];
+      if (cell === null) continue;
+
       const hCell = {
         type: 'element',
         tagName: tag,
-        properties: { align: align[j], rowspan: cell.rowspan, colspan: cell.colspan },
+        properties: { align: align[j + colOffset], rowspan: cell.rowspan, colspan: cell.colspan },
         children: cell ? state.all(cell) : [],
       } as Element;
+
+      // adjust offset
+      if (cell.colspan != null && cell.colspan > 1) {
+        colOffset += cell.colspan - 1;
+      }
+      // insert empty cells to fill the gap
+      if (cell.rowspan != null && cell.rowspan > 1) {
+        const size = cell.colspan ?? 1;
+        tmpTable[i + 1].splice(j, 0, ...(Array(size).fill(null) as null[]));
+      }
+
       state.patch(cell, hCell);
       out.push(hCell);
     }

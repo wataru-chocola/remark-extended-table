@@ -682,6 +682,107 @@ test('not empty cell colspan', () => {
   expect(result).toEqual(mdast);
 });
 
+test('align', () => {
+  const md = `
+| col 1 | col 2 | col 3 |
+|---|---:|:---:|
+| 1 | 2 | 4 |
+| ^ | 3 | 5 |
+| > | 6 | 7 |
+`;
+  const mdast = {
+    type: 'root',
+    children: [
+      {
+        type: 'table',
+        align: [null, 'right', 'center'],
+        children: [
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'col 1', position: expect.anything() }],
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'col 2', position: expect.anything() }],
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: 'col 3', position: expect.anything() }],
+                position: expect.anything(),
+              },
+            ],
+            position: expect.anything(),
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '1', position: expect.anything() }],
+                rowspan: 2,
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '2', position: expect.anything() }],
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '4', position: expect.anything() }],
+                position: expect.anything(),
+              },
+            ],
+            position: expect.anything(),
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '3', position: expect.anything() }],
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '5', position: expect.anything() }],
+                position: expect.anything(),
+              },
+            ],
+            position: expect.anything(),
+          },
+          {
+            type: 'tableRow',
+            children: [
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '6', position: expect.anything() }],
+                colspan: 2,
+                position: expect.anything(),
+              },
+              {
+                type: 'tableCell',
+                children: [{ type: 'text', value: '7', position: expect.anything() }],
+                position: expect.anything(),
+              },
+            ],
+            position: expect.anything(),
+          },
+        ],
+        position: expect.anything(),
+      },
+    ],
+    position: expect.anything(),
+  };
+  const result = compile(md);
+  expect(result).toEqual(mdast);
+});
+
 test('regression: more than 2 colspanWithRight is not working', () => {
   const md = `
 | a | b | c |
