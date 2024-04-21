@@ -8,7 +8,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "moduleResolution": "Bundler",
-    "composite": true
+    "composite": true,
+    "rootDir": "./lib",
+    "outDir": "./dist"
   },
   "references": [
     { "path": "../micromark-extension-extended-table" },

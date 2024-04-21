@@ -12,15 +12,15 @@
     "url": "https://github.com/wataru-chocola/remark-extended-table/issues"
   },
   "homepage": "https://github.com/wataru-chocola/remark-extended-table/tree/main/packages/remark-extended-table",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "sideEffects": false,
   "files": [
-    "lib/*.js",
-    "lib/*.d.ts",
-    "!lib/*.test.js",
-    "!lib/*.test.d.ts"
+    "dist/*.js",
+    "dist/*.d.ts",
+    "!dist/*.test.js",
+    "!dist/*.test.d.ts"
   ],
   "keywords": [
     "remark",
@@ -48,11 +48,11 @@
     "format": "prettier --write \"./**/*.{ts,json}\"",
     "lint": "eslint ./**/*.ts",
     "lint-fix": "eslint --fix ./**/*.ts && prettier --write ./**/*.{ts,json}",
-    "test": "vitest run --passWithNoTests .js",
+    "test": "vitest run --passWithNoTests --root dist",
     "test:dev": "vitest --passWithNoTests .ts",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run rebuild",
-    "clean": "rimraf lib/*{.js,.d.ts} tsconfig.tsbuildinfo"
+    "clean": "rimraf dist lib/*.js lib/*.d.ts tsconfig.tsbuildinfo"
   }
 }

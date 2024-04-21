@@ -247,6 +247,41 @@ test('cell sandwiched between colspan markers', async () => {
   expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
 });
 
+test('align', async () => {
+  const md = `
+| col 1 | col 2 | col 3 |
+|---|---:|:---:|
+| 1 | 2 | 4 |
+| ^ | 3 | 5 |
+| > | 6 | 7 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>col 1</th>
+<th align="right">col 2</th>
+<th align="center">col 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">1</td>
+<td align="right">2</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td colspan="2">6</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
+});
+
 test('edge case: empty cell merged with below cell', async () => {
   const md = `
 a | b
@@ -322,6 +357,38 @@ test('regression: more than 2 colspanWithRight is not working', async () => {
 <tbody>
 <tr>
 <td colspan="3">1</td>
+</tr>
+</tbody>
+</table>`;
+  expect((await process(md, { colspanWithEmpty: true })).value).toBe(html);
+});
+
+test('too many cells in a row', async () => {
+  const md = `
+| col 1 | col 2 |
+|---|---:|
+| 1 | 2 |
+| ^ | 3 | 5 |
+| > | 6 |
+`;
+  const html = `<table>
+<thead>
+<tr>
+<th>col 1</th>
+<th align="right">col 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">1</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td>5</td>
+</tr>
+<tr>
+<td colspan="2">6</td>
 </tr>
 </tbody>
 </table>`;
