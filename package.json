@@ -35,7 +35,7 @@
     "npm-check-updates": "16.14.20",
     "prettier": "3.3.2",
     "rimraf": "5.0.7",
-    "typescript": "5.2.2",
+    "typescript": "5.5.3",
     "vitest": "0.34.6"
   }
 }
