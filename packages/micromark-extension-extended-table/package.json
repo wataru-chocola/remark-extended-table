@@ -39,7 +39,7 @@
     "debug": "4.3.6",
     "micromark": "4.0.0",
     "micromark-build": "2.0.2",
-    "micromark-extension-gfm-table": "2.0.0"
+    "micromark-extension-gfm-table": "2.1.0"
   },
   "peerDependencies": {
     "micromark": "^4.0.0",
