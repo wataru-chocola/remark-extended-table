@@ -40,7 +40,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "hast-util-to-html": "9.0.1",
+    "hast-util-to-html": "9.0.2",
     "mdast-util-gfm-table": "2.0.0",
     "micromark-extension-gfm-table": "2.1.0",
     "unist-util-inspect": "8.0.0"
