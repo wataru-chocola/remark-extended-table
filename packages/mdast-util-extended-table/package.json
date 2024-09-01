@@ -42,7 +42,7 @@
   "devDependencies": {
     "hast-util-to-html": "9.0.1",
     "mdast-util-gfm-table": "2.0.0",
-    "micromark-extension-gfm-table": "2.0.0",
+    "micromark-extension-gfm-table": "2.1.0",
     "unist-util-inspect": "8.0.0"
   },
   "peerDependencies": {
