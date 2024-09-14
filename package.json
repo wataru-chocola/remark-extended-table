@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.10.0",
   "name": "remark-extended-table",
   "version": "0.0.0",
   "author": "Wataru Watanabe",
