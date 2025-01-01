@@ -30,8 +30,8 @@ importers:
         specifier: 8.1.9
         version: 8.1.9(encoding@0.1.13)
       npm-check-updates:
-        specifier: 17.1.3
-        version: 17.1.3
+        specifier: 17.1.13
+        version: 17.1.13
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -2817,8 +2817,8 @@ packages:
     resolution: {integrity: sha512-Vq0eyEQy+elFpzsKjMss9kxqb9tG3YHg4dsyWuUENuzvSUWe1TCnW/vV9FkhvBk/brEDoDiVd+M1Btosa6ImdQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  npm-check-updates@17.1.3:
-    resolution: {integrity: sha512-4uDLBWPuDHT5KLieIJ20FoAB8yqJejmupI42wPyfObgQOBbPAikQSwT73afDwREvhuxYrRDqlRvxTMSfvO+L8A==}
+  npm-check-updates@17.1.13:
+    resolution: {integrity: sha512-m9Woo2J5XVab0VcQpYvrQ0hx3ySI1mGbiHR595mc6Lr1/FIaTWvv+oU+T1WKSfXRiluKC/V5P6Bdk5agaYpqqg==}
     engines: {node: ^18.18.0 || >=20.0.0, npm: '>=8.12.1'}
     hasBin: true
 
@@ -7305,7 +7305,7 @@ snapshots:
     dependencies:
       npm-normalize-package-bin: 3.0.1
 
-  npm-check-updates@17.1.3: {}
+  npm-check-updates@17.1.13: {}
 
   npm-install-checks@6.3.0:
     dependencies:
