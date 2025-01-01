@@ -37,7 +37,7 @@
     "@types/assert": "1.5.11",
     "@types/debug": "4.1.12",
     "debug": "4.3.7",
-    "micromark": "4.0.0",
+    "micromark": "4.0.1",
     "micromark-build": "2.0.2",
     "micromark-extension-gfm-table": "2.1.0"
   },
