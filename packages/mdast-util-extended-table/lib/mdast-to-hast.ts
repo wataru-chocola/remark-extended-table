@@ -4,7 +4,7 @@ import { pointStart, pointEnd } from 'unist-util-position';
 import type { Element, ElementContent as Content } from 'hast';
 
 import type { Table, TableRow, TableCell } from './types.js';
-import { AlignType } from 'mdast';
+import type { AlignType } from 'mdast';
 
 const mdastTableRowsToHast = (state: State, rows: TableRow[], align: AlignType[]) => {
   const hRows = [];

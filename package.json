@@ -26,17 +26,17 @@
     "lerna:publish": "lerna publish from-git"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@types/node": "22.10.5",
-    "@typescript-eslint/eslint-plugin": "6.7.5",
-    "@typescript-eslint/parser": "6.7.5",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-import": "2.29.1",
+    "eslint": "9.17.0",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-import": "2.31.0",
     "lerna": "8.1.9",
     "npm-check-updates": "17.1.13",
     "prettier": "3.4.2",
     "rimraf": "6.0.1",
     "typescript": "5.7.2",
+    "typescript-eslint": "^8.19.0",
     "vitest": "2.1.8"
   }
 }
