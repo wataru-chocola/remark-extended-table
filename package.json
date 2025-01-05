@@ -29,7 +29,7 @@
     "@types/node": "22.10.5",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
-    "eslint": "8.57.1",
+    "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
     "lerna": "8.1.9",
