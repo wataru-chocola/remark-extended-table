@@ -1,5 +1,5 @@
 import { tokenTypes } from './types.js';
-import { CompileContext } from 'micromark-util-types';
+import type { CompileContext } from 'micromark-util-types';
 
 export const extendedTableHtml = {
   enter: {
