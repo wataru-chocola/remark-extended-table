@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/wataru-chocola/remark-extended-table/compare/micromark-extension-extended-table@2.0.2...micromark-extension-extended-table@2.0.3) (2025-04-07)
+
+* chore: use devlop assert
+
 
 ## [2.0.2](https://github.com/wataru-chocola/remark-extended-table/compare/micromark-extension-extended-table@2.0.1...micromark-extension-extended-table@2.0.2) (2024-04-21)
 

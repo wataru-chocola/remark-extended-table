@@ -1,6 +1,6 @@
 {
   "name": "mdast-util-extended-table",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "mdast extension for table allowing colspan/rowspan",
   "author": "Wataru Watanabe",
   "license": "MIT",
