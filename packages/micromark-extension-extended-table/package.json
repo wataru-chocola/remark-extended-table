@@ -28,15 +28,14 @@
     "index.js"
   ],
   "dependencies": {
-    "assert": "^2.1.0",
     "micromark-util-chunked": "^2.0.0",
     "micromark-util-symbol": "^2.0.0",
     "micromark-util-types": "^2.0.0"
   },
   "devDependencies": {
-    "@types/assert": "1.5.11",
     "@types/debug": "4.1.12",
     "debug": "4.4.0",
+    "devlop": "^1.1.0",
     "micromark": "4.0.2",
     "micromark-build": "2.0.3",
     "micromark-extension-gfm-table": "2.1.1"
