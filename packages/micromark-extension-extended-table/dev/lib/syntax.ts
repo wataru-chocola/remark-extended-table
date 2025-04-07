@@ -10,7 +10,7 @@ import type {
 import { splice } from 'micromark-util-chunked';
 import { codes, types } from 'micromark-util-symbol';
 import { tokenTypes } from './types.js';
-import assert from 'assert';
+import { ok as assert } from 'devlop';
 import Debug from 'debug';
 
 const debug = Debug('micromark-extension-extended-table:syntax');
