@@ -110,7 +110,7 @@ importers:
         specifier: 4.4.0
         version: 4.4.0
       devlop:
-        specifier: ^1.1.0
+        specifier: 1.1.0
         version: 1.1.0
       micromark:
         specifier: 4.0.2
