@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/debug": "4.1.12",
-    "debug": "4.4.1",
+    "debug": "4.4.3",
     "devlop": "1.1.0",
     "micromark": "4.0.2",
     "micromark-build": "2.0.3",
