@@ -27,8 +27,8 @@ importers:
         specifier: 8.2.4
         version: 8.2.4(encoding@0.1.13)
       npm-check-updates:
-        specifier: 17.1.18
-        version: 17.1.18
+        specifier: 19.6.6
+        version: 19.6.6
       prettier:
         specifier: 3.6.2
         version: 3.6.2
@@ -3040,9 +3040,9 @@ packages:
     resolution: {integrity: sha512-Vq0eyEQy+elFpzsKjMss9kxqb9tG3YHg4dsyWuUENuzvSUWe1TCnW/vV9FkhvBk/brEDoDiVd+M1Btosa6ImdQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  npm-check-updates@17.1.18:
-    resolution: {integrity: sha512-bkUy2g4v1i+3FeUf5fXMLbxmV95eG4/sS7lYE32GrUeVgQRfQEk39gpskksFunyaxQgTIdrvYbnuNbO/pSUSqw==}
-    engines: {node: ^18.18.0 || >=20.0.0, npm: '>=8.12.1'}
+  npm-check-updates@19.6.6:
+    resolution: {integrity: sha512-AvlRcnlUEyBEJfblUSjYMJwYKvCIWDRuCDa6x3hyUMTMkI3kslmFm0LDqwgzQfshfNh0Z3ouKiA4fLjRN7HejQ==}
+    engines: {node: '>=20.0.0', npm: '>=8.12.1'}
     hasBin: true
 
   npm-install-checks@6.3.0:
@@ -7723,7 +7723,7 @@ snapshots:
     dependencies:
       npm-normalize-package-bin: 3.0.1
 
-  npm-check-updates@17.1.18: {}
+  npm-check-updates@19.6.6: {}
 
   npm-install-checks@6.3.0:
     dependencies:
