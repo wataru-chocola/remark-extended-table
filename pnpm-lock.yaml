@@ -119,8 +119,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2
       micromark-build:
-        specifier: 2.0.3
-        version: 2.0.3
+        specifier: 2.0.4
+        version: 2.0.4
       micromark-extension-gfm-table:
         specifier: 2.1.1
         version: 2.1.1
@@ -2797,8 +2797,8 @@ packages:
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
 
-  micromark-build@2.0.3:
-    resolution: {integrity: sha512-ZWDm7CtPUUuef0RAPXerx7JxXJYn4Y1MfW5eovPffbXvPKwM30CBrjroUqCHVLsuFNZeu4ZvNOA7y3ml/FoXlw==}
+  micromark-build@2.0.4:
+    resolution: {integrity: sha512-UEuSfZz2fqmKRYz6+BWH4uuRWkFFoyuhxfPETm7HMTgy8quap8rNcczGdw3xcRfpvsb/YCkXCid+/1dopCFrmw==}
     hasBin: true
 
   micromark-core-commonmark@2.0.0:
@@ -7360,13 +7360,13 @@ snapshots:
 
   merge-stream@2.0.0: {}
 
-  micromark-build@2.0.3:
+  micromark-build@2.0.4:
     dependencies:
       '@babel/core': 7.22.8
       babel-plugin-inline-constants: 5.0.0
       babel-plugin-unassert: 3.2.0
       babel-plugin-undebug: 3.0.0
-      glob: 10.3.10
+      glob: 13.0.6
       import-meta-resolve: 4.1.0
       relativize-url: 0.1.0
     transitivePeerDependencies:
