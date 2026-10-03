@@ -49,9 +49,6 @@
     "micromark-extension"
   ],
   "scripts": {
-    "format": "prettier --write \"./dev/**/*.{js,ts,json}\"",
-    "lint": "eslint \"./dev/**/*.ts\"",
-    "lint-fix": "eslint --fix \"./dev/**/*.ts\" && prettier --write ./dev/**/*.{ts}",
     "test": "vitest run --passWithNoTests .js",
     "test:dev": "vitest --passWithNoTests .ts",
     "build": "tsc --build --verbose && micromark-build",
