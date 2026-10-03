@@ -38,7 +38,7 @@
     "devlop": "1.1.0",
     "micromark": "4.0.3",
     "micromark-build": "2.0.4",
-    "micromark-extension-gfm-table": "2.1.1"
+    "micromark-extension-gfm-table": "2.1.2"
   },
   "peerDependencies": {
     "micromark": "^4.0.0",
