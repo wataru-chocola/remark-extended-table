@@ -49,9 +49,6 @@
     "mdast-util-gfm-table": "^2.0.0"
   },
   "scripts": {
-    "format": "prettier --write \"./**/*.{ts,json}\"",
-    "lint": "eslint './**/*.ts'",
-    "lint-fix": "eslint --fix './**/*.ts' && prettier --write ./**/*.{ts,json}",
     "test": "vitest run --passWithNoTests --root dist",
     "test:dev": "vitest --passWithNoTests .ts",
     "build": "tsc --build --verbose",
