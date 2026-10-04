@@ -53,7 +53,7 @@
     "test:dev": "vitest --passWithNoTests .ts",
     "build": "tsc --build --verbose",
     "rebuild": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run rebuild",
+    "prepack": "pnpm run rebuild",
     "clean": "rimraf dist lib/*.js lib/*.d.ts tsconfig.tsbuildinfo"
   }
 }
