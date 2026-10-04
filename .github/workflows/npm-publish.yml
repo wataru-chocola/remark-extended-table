@@ -1,0 +1,57 @@
+# Publish a package to npm when a release tagged `<package-name>@<version>` is created.
+
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: pnpm install
+      - run: pnpm run build
+      - run: pnpm run test
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          package-manager-cache: false
+      - run: pnpm install
+      - run: pnpm run build
+      - name: Publish the package named by the release tag
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          name="${TAG%@*}"
+          version="${TAG##*@}"
+          manifest="packages/${name}/package.json"
+          if [ ! -f "$manifest" ]; then
+            echo "::error::no package for tag ${TAG}"
+            exit 1
+          fi
+          actual="$(jq -r .version "$manifest")"
+          if [ "$actual" != "$version" ]; then
+            echo "::error::tag ${TAG} does not match ${name}@${actual}"
+            exit 1
+          fi
+          pnpm --filter "$name" publish --no-git-checks --provenance

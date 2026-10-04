@@ -19,16 +19,12 @@
     "format:check": "oxfmt --check",
     "lint": "oxlint --type-aware",
     "lint-fix": "oxlint --type-aware --fix && oxfmt",
-    "test": "lerna run test",
-    "build": "lerna run build",
-    "clean": "lerna run clean",
-    "lerna:versionup": "lerna version --no-push --no-git-tag-version --conventional-commits",
-    "lerna:versionup:push": "git push && git push --tags",
-    "lerna:publish": "lerna publish from-git"
+    "test": "pnpm -r run test",
+    "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean"
   },
   "devDependencies": {
     "@types/node": "24.19.0",
-    "lerna": "8.2.4",
     "oxfmt": "0.71.0",
     "oxlint": "1.86.0",
     "oxlint-tsgolint": "7.0.2003",

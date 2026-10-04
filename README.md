@@ -1,6 +1,6 @@
 # remark-extended-table
 
-[![Lerna CI](https://github.com/wataru-chocola/remark-extended-table/actions/workflows/lerna-ci.js.yml/badge.svg)](https://github.com/wataru-chocola/remark-extended-table/actions/workflows/lerna-ci.js.yml)
+[![Node.js CI](https://github.com/wataru-chocola/remark-extended-table/actions/workflows/node.js.yml/badge.svg)](https://github.com/wataru-chocola/remark-extended-table/actions/workflows/node.js.yml)
 
 [remark][] plugin to support table syntax allowing colspan / rowspan
 
